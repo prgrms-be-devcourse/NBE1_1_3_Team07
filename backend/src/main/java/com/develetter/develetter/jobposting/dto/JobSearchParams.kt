@@ -1,38 +1,39 @@
-package com.develetter.develetter.jobposting.dto;
+package com.develetter.develetter.jobposting.dto
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import com.develetter.develetter.global.util.DtoUtil
 
-public record JobSearchParams(
-        String keywords,
-        Integer bbs_gb,
-        String stock,
-        String sr,
-        String loc_cd,
-        String loc_mcd,
-        String loc_bcd,
-        String ind_cd,
-        String job_mid_cd,
-        String job_cd,
-        String job_type,
-        String edu_lv,
-        String fields,
-        String published,
-        String published_min,
-        String published_max,
-        String updated,
-        String updated_min,
-        String updated_max,
-        String deadline,
-        Integer start,
-        Integer count,
-        String sort
+data class JobSearchParams(
+    val keywords: String? = null,
+    val bbs_gb: Int? = null,
+    val stock: String? = null,
+    val sr: String? = null,
+    val loc_cd: String? = null,
+    val loc_mcd: String? = null,
+    val loc_bcd: String? = null,
+    val ind_cd: String? = null,
+    val job_mid_cd: String? = null,
+    val job_cd: String = "84+86+87",
+    val job_type: String? = null,
+    val edu_lv: String? = null,
+    val fields: String = "posting-date+expiration-date+count",
+    val published: String? = null,
+    val published_min: String,
+    val published_max: String? = null,
+    val updated: String? = null,
+    val updated_min: String? = null,
+    val updated_max: String? = null,
+    val deadline: String? = null,
+    val start: Int,
+    val count: Int = 100,
+    val sort: String? = null
 ) {
-    public static JobSearchParams defaultParams(int start, String published_min) {
-
-        return new JobSearchParams(
-                null, null, null, null, null, null, null, null,
-                null, "84+86+87", null, null, "posting-date+expiration-date+count", null, published_min, null,
-                null, null, null, null, start, 100, null);
+    // Companion 객체를 반환하는 대신 직접 Map을 리턴하도록 변경
+    companion object {
+        fun defaultParams(start: Int, publishedMin: String): Map<String, Any?> {
+            return JobSearchParams(
+                start = start,
+                published_min = publishedMin
+            ).let { DtoUtil.toMap(it) }
+        }
     }
 }

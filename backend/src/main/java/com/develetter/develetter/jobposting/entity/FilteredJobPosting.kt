@@ -1,39 +1,36 @@
-package com.develetter.develetter.jobposting.entity;
+package com.develetter.develetter.jobposting.entity
 
-import com.develetter.develetter.global.entity.BaseEntity;
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import com.develetter.develetter.global.entity.BaseEntity
+import jakarta.persistence.*
+import lombok.AccessLevel
+import lombok.NoArgsConstructor
+import lombok.experimental.SuperBuilder
 
 @Entity
-@Getter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Table(name = "filtered_job_posting")
-public class FilteredJobPosting extends BaseEntity {
+class FilteredJobPosting(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    val id: Long? = null,
 
     @Column(name = "user_id", nullable = false)
-    private Long userId;
+    val userId: Long,
 
     @Column(name = "job_postings", nullable = false)
-    private String jobPostings;
+    var jobPostings: String = ""
 
-    // jobPostingList에 새로운 JobPosting ID를 추가하는 메서드
-    public void addJobPosting(Long jobPostingId) {
-        if (this.jobPostings == null || this.jobPostings.isEmpty()) {
-            this.jobPostings = String.valueOf(jobPostingId);
+) : BaseEntity() {
+
+    // jobPostings 필드에 새로운 JobPosting ID를 추가하는 메서드
+    fun addJobPosting(jobPostingId: Long) {
+        jobPostings = if (jobPostings.isEmpty()) {
+            jobPostingId.toString()
         } else {
-            this.jobPostings += "," + jobPostingId;
+            "$jobPostings,$jobPostingId"
         }
     }
-
 }

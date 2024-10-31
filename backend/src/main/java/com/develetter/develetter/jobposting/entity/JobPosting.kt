@@ -1,125 +1,118 @@
-package com.develetter.develetter.jobposting.entity;
+package com.develetter.develetter.jobposting.entity
 
-import com.develetter.develetter.global.entity.BaseEntity;
-import jakarta.persistence.*;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDateTime;
+import com.develetter.develetter.global.entity.BaseEntity
+import jakarta.persistence.*
+import java.time.LocalDateTime
 
 @Entity
-@Getter
-@SuperBuilder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Table(name = "job_posting")
-public class JobPosting extends BaseEntity {
+class JobPosting(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    val id: Long? = null,
 
     @Column(name = "url", nullable = false, length = 255)
-    private String url;
+    val url: String? = null,
 
     @Column(name = "active", nullable = false)
-    private Boolean active;
+    val active: Boolean = true,
 
     @Column(name = "company_name", nullable = false, length = 255)
-    private String companyName;
+    val companyName: String? = null,
 
     @Column(name = "company_url", length = 255)
-    private String companyUrl;
+    val companyUrl: String? = null,
 
     @Column(name = "title", nullable = false, length = 255)
-    private String title;
+    val title: String? = null,
 
     @Column(name = "industry_code", length = 50)
-    private String industryCode;
+    val industryCode: String? = null,
 
     @Column(name = "industry_name", length = 255)
-    private String industryName;
+    val industryName: String? = null,
 
     @Column(name = "location_code", length = 255)
-    private String locationCode;
+    val locationCode: String? = null,
 
     @Column(name = "location_name", length = 255)
-    private String locationName;
+    val locationName: String? = null,
 
     @Column(name = "job_type_code", length = 255)
-    private String jobTypeCode;
+    val jobTypeCode: String? = null,
 
     @Column(name = "job_type_name", length = 255)
-    private String jobTypeName;
+    val jobTypeName: String? = null,
 
     @Column(name = "job_mid_code", length = 255)
-    private String jobMidCode;
+    val jobMidCode: String? = null,
 
     @Column(name = "job_mid_name", length = 255)
-    private String jobMidName;
+    val jobMidName: String? = null,
 
     @Column(name = "job_code", columnDefinition = "TEXT")
-    private String jobCode;
+    val jobCode: String? = null,
 
     @Column(name = "job_name", columnDefinition = "TEXT")
-    private String jobName;
+    val jobName: String? = null,
 
     @Column(name = "experience_code")
-    private Integer experienceCode;
+    val experienceCode: Int? = null,
 
     @Column(name = "experience_min")
-    private Integer experienceMin;
+    val experienceMin: Int? = null,
 
     @Column(name = "experience_max")
-    private Integer experienceMax;
+    val experienceMax: Int? = null,
 
     @Column(name = "experience_name", length = 255)
-    private String experienceName;
+    val experienceName: String? = null,
 
     @Column(name = "education_level_code", length = 50)
-    private String educationLevelCode;
+    val educationLevelCode: String? = null,
 
     @Column(name = "education_level_name", length = 255)
-    private String educationLevelName;
+    val educationLevelName: String? = null,
 
     @Column(name = "keyword", columnDefinition = "TEXT")
-    private String keyword;
+    val keyword: String? = null,
 
     @Column(name = "salary_code", length = 50)
-    private String salaryCode;
+    val salaryCode: String? = null,
 
     @Column(name = "salary_name", length = 255)
-    private String salaryName;
+    val salaryName: String? = null,
 
     @Column(name = "posting_timestamp")
-    private Long postingTimestamp;
+    val postingTimestamp: Long? = null,
 
     @Column(name = "posting_date")
-    private LocalDateTime postingDate;
+    val postingDate: LocalDateTime? = null,
 
     @Column(name = "modification_timestamp")
-    private Long modificationTimestamp;
+    val modificationTimestamp: Long? = null,
 
     @Column(name = "opening_timestamp")
-    private Long openingTimestamp;
+    val openingTimestamp: Long? = null,
 
     @Column(name = "expiration_timestamp")
-    private Long expirationTimestamp;
+    val expirationTimestamp: Long? = null,
 
     @Column(name = "expiration_date")
-    private LocalDateTime expirationDate;
+    val expirationDate: LocalDateTime? = null,
 
     @Column(name = "close_type_code", length = 50)
-    private String closeTypeCode;
+    val closeTypeCode: String? = null,
 
     @Column(name = "close_type_name", length = 255)
-    private String closeTypeName;
+    val closeTypeName: String? = null,
 
     @Column(name = "read_count", nullable = false)
-    private Integer readCount = 0;
+    val readCount: Int = 0,
 
     @Column(name = "apply_count", nullable = false)
-    private Integer applyCount = 0;
+    val applyCount: Int = 0
 
-}
+) : BaseEntity()
