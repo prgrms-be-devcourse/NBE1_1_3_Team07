@@ -1,7 +1,8 @@
-package com.develetter.develetter.user.global.common;
+package com.develetter.develetter.user.global.common
 
-public interface Role {
-    String USER = "ROLE_USER";
-
-    String ADMIN = "ROLE_ADMIN";
+interface Role {
+    companion object {
+        const val USER = "ROLE_USER"
+        const val ADMIN = "ROLE_ADMIN"
+    }
 }

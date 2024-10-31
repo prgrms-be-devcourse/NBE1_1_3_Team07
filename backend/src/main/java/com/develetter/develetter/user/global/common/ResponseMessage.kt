@@ -1,24 +1,16 @@
-package com.develetter.develetter.user.global.common;
+package com.develetter.develetter.user.global.common
 
-public interface ResponseMessage {
-    String SUCCESS = "Success";
-
-    String VALIDATION_FAIL = "Validation failed";
-
-    String DUPLICATE_ID = "Duplicate ID";
-
-    String SIGN_IN_FAIL = "Login information mismatch";
-
-    String CERTIFICATION_FAIL = "Certification failed";
-
-    String MAIL_FAIL = "Failed to send email";
-
-    String DATABASE_ERROR = "Database error";
-
-    String ID_NOT_FOUND = "ID Not found";
-
-    String ID_NOT_MATCHING = "ID does not match";
-
-    String WRONG_ROLE = "Wrong role.";
-
+interface ResponseMessage {
+    companion object {
+        const val SUCCESS = "Success"
+        const val VALIDATION_FAIL = "Validation failed"
+        const val DUPLICATE_ID = "Duplicate ID"
+        const val SIGN_IN_FAIL = "Login information mismatch"
+        const val CERTIFICATION_FAIL = "Certification failed"
+        const val MAIL_FAIL = "Failed to send email"
+        const val DATABASE_ERROR = "Database error"
+        const val ID_NOT_FOUND = "ID Not found"
+        const val ID_NOT_MATCHING = "ID does not match"
+        const val WRONG_ROLE = "Wrong role."
+    }
 }

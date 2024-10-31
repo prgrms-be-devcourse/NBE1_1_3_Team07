@@ -1,34 +1,33 @@
-package com.develetter.develetter.user.global.entity;
+package com.develetter.develetter.user.global.entity
 
-import com.develetter.develetter.global.entity.BaseEntity;
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import com.develetter.develetter.global.entity.BaseEntity
+import jakarta.persistence.*
+import org.hibernate.annotations.DynamicInsert
 
-@Getter
-@SuperBuilder
-@NoArgsConstructor(access= AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Entity(name="certification" )
-@Table(name = "certification"  )
-/**
- * 이메일 검증을 위한 Entity
- */
-public class CertificationEntity extends BaseEntity {
+@Entity(name = "certification")
+@Table(name = "certification")
+@DynamicInsert
+class CertificationEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    var id: Long = 0,
 
     @Column(name = "account_id", nullable = false, length = 30)
-    private String accountId;
+    var accountId: String,
 
     @Column(name = "email", nullable = false, length = 255)
-    private String email;
+    var email: String,
 
     @Column(name = "certification_number", nullable = false, length = 6)
-    private String certificationNumber;
+    var certificationNumber: String
+) : BaseEntity() {
+
+    // 기본 생성자 제공 (필요시 추가 설정 가능)
+    constructor() : this(
+        id = 0,
+        accountId = "",
+        email = "",
+        certificationNumber = ""
+    )
 }

@@ -1,14 +1,12 @@
-package com.develetter.develetter.user.repository;
+package com.develetter.develetter.user.repository
 
-import com.develetter.develetter.user.global.entity.CertificationEntity;
-import jakarta.transaction.Transactional;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.develetter.develetter.user.global.entity.CertificationEntity
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
 
 @Repository
-public interface CertificationRepository extends JpaRepository<CertificationEntity, String> {
-    CertificationEntity findByAccountId(String accountId);
-    void deleteByAccountId(String accountId);
-    CertificationEntity findTopByAccountIdOrderByCreatedAtDesc(String accountId);
-
+interface CertificationRepository : JpaRepository<CertificationEntity, String> {
+    fun findByAccountId(accountId: String): CertificationEntity?
+    fun deleteByAccountId(accountId: String)
+    fun findTopByAccountIdOrderByCreatedAtDesc(accountId: String): CertificationEntity?
 }

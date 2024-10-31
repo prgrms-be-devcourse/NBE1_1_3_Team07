@@ -1,18 +1,13 @@
-package com.develetter.develetter.user.global.dto.request;
+package com.develetter.develetter.user.global.dto.request
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.NotBlank
 
-@Getter
-@NoArgsConstructor
-public class SigninRequestDto {
-    @Email
-    @NotBlank
-    private String email;
+data class SigninRequestDto(
+    @field:Email
+    @field:NotBlank
+    val email: String = "",
 
-    @NotBlank
-    private String password;
-}
+    @field:NotBlank
+    val password: String = ""
+)

@@ -5,8 +5,6 @@ import com.develetter.develetter.mail.repository.MailRepository;
 import com.develetter.develetter.mail.service.AsyncMailService;
 import com.develetter.develetter.mail.service.ConferenceCalendarService;
 import com.develetter.develetter.mail.service.MailService;
-import com.develetter.develetter.user.global.entity.UserEntity;
-import com.develetter.develetter.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.*;

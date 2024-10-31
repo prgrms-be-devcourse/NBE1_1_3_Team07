@@ -1,7 +1,6 @@
 package com.develetter.develetter.userfilter.controller;
 
 import com.develetter.develetter.global.dto.ApiResponseDto;
-import com.develetter.develetter.user.provider.JwtProvider;
 import com.develetter.develetter.userfilter.dto.UserFilterReqDto;
 import com.develetter.develetter.userfilter.service.UserFilterService;
 import io.swagger.v3.oas.annotations.Operation;

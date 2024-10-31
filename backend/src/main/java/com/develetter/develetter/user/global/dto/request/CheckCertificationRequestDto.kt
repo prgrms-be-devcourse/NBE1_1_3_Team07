@@ -1,18 +1,13 @@
-package com.develetter.develetter.user.global.dto.request;
+package com.develetter.develetter.user.global.dto.request
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.NotBlank
 
-@Getter
-@NoArgsConstructor
-public class CheckCertificationRequestDto {
-    @Email
-    @NotBlank
-    private String email;
+data class CheckCertificationRequestDto(
+    @field:Email
+    @field:NotBlank
+    val email: String = "",
 
-    @NotBlank
-    private String certificationNumber;
-}
+    @field:NotBlank
+    val certificationNumber: String = ""
+)

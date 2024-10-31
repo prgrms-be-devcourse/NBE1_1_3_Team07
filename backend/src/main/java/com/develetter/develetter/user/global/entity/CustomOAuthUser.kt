@@ -1,35 +1,24 @@
-package com.develetter.develetter.user.global.entity;
+package com.develetter.develetter.user.global.entity
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-
-import java.util.Collection;
-import java.util.Map;
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.oauth2.core.user.OAuth2User
 
 /**
  * OAuth2User 커스텀을 위한 핸들
  */
-@NoArgsConstructor
-@AllArgsConstructor
-public class CustomOAuthUser implements OAuth2User {
+data class CustomOAuthUser(
+    private val accountId: String
+) : OAuth2User {
 
-    private String accountId;
-
-    @Override
-    public Map<String, Object> getAttributes() {
-        return null;
+    override fun getAttributes(): Map<String, Any>? {
+        return null
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    override fun getAuthorities(): Collection<GrantedAuthority>? {
+        return null
     }
 
-    @Override
-    public String getName() {
-        return this.accountId;
+    override fun getName(): String {
+        return accountId
     }
 }
-

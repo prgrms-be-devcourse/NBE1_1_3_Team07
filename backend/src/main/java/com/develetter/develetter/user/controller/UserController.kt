@@ -1,107 +1,102 @@
-package com.develetter.develetter.user.controller;
+package com.develetter.develetter.user.controller
 
-import com.develetter.develetter.user.global.dto.request.*;
-import com.develetter.develetter.user.global.dto.response.*;
-import com.develetter.develetter.user.service.UserService;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.Operation;
+import com.develetter.develetter.user.global.dto.request.*
+import com.develetter.develetter.user.global.dto.response.*
+import com.develetter.develetter.user.service.UserService
+import com.example.demo.user.global.dto.response.CheckCertificationResponseDto
+import com.example.demo.user.global.dto.response.DeleteIdResponseDto
+import com.example.demo.user.global.dto.response.EmailCertificationResponseDto
+import com.example.demo.user.global.dto.response.IdCheckResponseDto
+import com.example.demo.user.global.dto.response.RegisterSubscribeResponseDto
+import com.example.demo.user.global.dto.response.SigninResponseDto
+import com.example.demo.user.global.dto.response.SignupResponseDto
+import jakarta.validation.Valid
+import io.swagger.v3.oas.annotations.Operation
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
+import org.slf4j.LoggerFactory
 
-import java.io.IOException;
-
-@Slf4j
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/auth")
-public class UserController {
-    private final UserService userService;
+class UserController(
+    private val userService: UserService
+) {
+    private val log = LoggerFactory.getLogger(UserController::class.java)
 
     /**
      * ID 중복체크(id post 요청)
-     * @param requestBody
-     * @return
      */
     @Operation(summary = "ID 중복 체크", description = "ID 중복 체크하는 API")
     @PostMapping("/id-check")
-    public ResponseEntity<? super IdCheckResponseDto> idCheck(@RequestBody @Valid IdCheckRequestDto requestBody) {
-        ResponseEntity<? super IdCheckResponseDto> response= userService.idCheck(requestBody);
-        log.info("[idCheck]: {id:" + requestBody.getEmail()+ "}");
-        return response;
+    fun idCheck(@RequestBody @Valid requestBody: IdCheckRequestDto): ResponseEntity<in IdCheckResponseDto>? {
+        val response = userService.idCheck(requestBody)
+        log.info("[idCheck]: {id: ${requestBody.email}}")
+        return response
     }
 
     /**
      * 이메일 인증코드 발송(id, email을 post요청)
-     * @param requestBody
-     * @return
      */
     @Operation(summary = "이메일 인증코드 발송", description = "이메일 인증코드 발송하는 API")
     @PostMapping("/email-certification")
-    public ResponseEntity<? super EmailCertificationResponseDto> emailCertification(@RequestBody @Valid EmailCertificationRequestDto requestBody) {
-        ResponseEntity<? super EmailCertificationResponseDto> response= userService.emailCertification(requestBody);
-        log.info("[emailCertification]: {id: " + requestBody.getEmail() + ", email: " + requestBody.getEmail() + "}");
-        return response;
+    fun emailCertification(@RequestBody @Valid requestBody: EmailCertificationRequestDto): ResponseEntity<in EmailCertificationResponseDto>? {
+        val response = userService.emailCertification(requestBody)
+        log.info("[emailCertification]: {id: ${requestBody.email}, email: ${requestBody.email}}")
+        return response
     }
 
     /**
      * 이메일 인증번호 검사(id, email, certificationCode post 요청)
-     * @param requestBody
-     * @return
      */
     @Operation(summary = "이메일 인증코드 검사", description = "이메일 인증코드 일치하는지 검사하는 API")
     @PostMapping("/check-certification")
-    public ResponseEntity<? super CheckCertificationResponseDto> checkCertification(@RequestBody @Valid CheckCertificationRequestDto requestBody) {
-        ResponseEntity<? super CheckCertificationResponseDto> response= userService.checkCertification(requestBody);
-        log.info("[checkCertification]: {id: " + requestBody.getEmail() + ", email: " + requestBody.getEmail() + ", certificationNumber: " + requestBody.getCertificationNumber() + "}");
-        return response;
+    fun checkCertification(@RequestBody @Valid requestBody: CheckCertificationRequestDto): ResponseEntity<in CheckCertificationResponseDto>? {
+        val response = userService.checkCertification(requestBody)
+        log.info("[checkCertification]: {id: ${requestBody.email}, email: ${requestBody.email}, certificationNumber: ${requestBody.certificationNumber}}")
+        return response
     }
 
     /**
      * 회원가입하기 (id, password, email, certificationNumber post 요청)
-     * @param requestBody
-     * @return
      */
     @Operation(summary = "회원가입", description = "회원가입 하는 API")
     @PostMapping("/sign-up")
-    public ResponseEntity<? super SignupResponseDto> signUp(@RequestBody @Valid SignupRequestDto requestBody) {
-        ResponseEntity<? super SignupResponseDto> response= userService.signUp(requestBody);
-        log.info("[signUp]: {id: " + requestBody.getEmail() + ", password: " + requestBody.getPassword() + ", email: " + requestBody.getEmail() + ", certificationNumber: " + requestBody.getCertificationNumber() + "}");
-        return response;
+    fun signUp(@RequestBody @Valid requestBody: SignupRequestDto): ResponseEntity<in SignupResponseDto>? {
+        val response = userService.signUp(requestBody)
+        log.info("[signUp]: {id: ${requestBody.email}, password: ${requestBody.password}, email: ${requestBody.email}, certificationNumber: ${requestBody.certificationNumber}}")
+        return response
     }
 
     /**
      * 로그인하기 (id, password post 요청)
-     * @param requestBody
-     * @return
      */
     @Operation(summary = "로그인", description = "로그인 하는 API")
     @PostMapping("/sign-in")
-    public ResponseEntity<? super SigninResponseDto> signIn(@RequestBody @Valid SigninRequestDto requestBody) {
-        ResponseEntity<? super SigninResponseDto> response= userService.signIn(requestBody);
-        log.info("[signIn]: {id: " + requestBody.getEmail() + ", password: " + requestBody.getPassword() + "}");
-        return response;
+    fun signIn(@RequestBody @Valid requestBody: SigninRequestDto): ResponseEntity<in SigninResponseDto>? {
+        val response = userService.signIn(requestBody)
+        log.info("[signIn]: {id: ${requestBody.email}, password: ${requestBody.password}}")
+        return response
     }
 
     /**
      * 계정삭제하기 (id, password post 요청 -> deletemapping으로 변경 가능)
-     * @param requestBody
-     * @return
      */
     @Operation(summary = "회원 탈퇴", description = "회원 탈퇴하는 API")
     @PostMapping("/delete-user")
-    public ResponseEntity<? super DeleteIdResponseDto> deleteUser(@RequestBody @Valid DeleteIdRequestDto requestBody) {
-        ResponseEntity<? super DeleteIdResponseDto> response= userService.deleteId(requestBody);
-        log.info("[deleteUser]: {id: " + requestBody.getEmail() + ", password: " + requestBody.getPassword() + "}");
-        return response;
+    fun deleteUser(@RequestBody @Valid requestBody: DeleteIdRequestDto): ResponseEntity<in DeleteIdResponseDto>? {
+        val response = userService.deleteId(requestBody)
+        log.info("[deleteUser]: {id: ${requestBody.email}, password: ${requestBody.password}}")
+        return response
     }
-    @Operation(summary = "구독회원 설", description = "구독회원을 설정하는 API")
+
+    /**
+     * 구독회원 설정 (id와 subscribeType을 post 요청)
+     */
+    @Operation(summary = "구독회원 설정", description = "구독회원을 설정하는 API")
     @PostMapping("/register-subscription")
-    public ResponseEntity<? super RegisterSubscribeResponseDto> registerSubscription(@RequestBody @Valid RegisterSubscribeRequestDto requestBody) {
-        ResponseEntity<? super RegisterSubscribeResponseDto> response = userService.registerSubscribe(requestBody);
-        log.info("[registerSubscription]: {id: " + requestBody.getUserId() + ",  subscribe: " + requestBody.getSubscribeType() + "}");
-        return response;
+    fun registerSubscription(@RequestBody @Valid requestBody: RegisterSubscribeRequestDto): ResponseEntity<in RegisterSubscribeResponseDto>? {
+        val response = userService.registerSubscribe(requestBody)
+        log.info("[registerSubscription]: {id: ${requestBody.userId}, subscribe: ${requestBody.subscribeType}}")
+        return response
     }
 }

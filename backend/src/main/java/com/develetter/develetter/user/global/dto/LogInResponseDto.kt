@@ -1,36 +1,28 @@
-package com.develetter.develetter.user.global.dto;
+package com.develetter.develetter.user.global.dto
 
-import com.develetter.develetter.user.global.common.ResponseCode;
-import com.develetter.develetter.user.global.common.ResponseMessage;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.develetter.develetter.user.global.common.ResponseCode
+import com.develetter.develetter.user.global.common.ResponseMessage
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 
-@Getter
-@AllArgsConstructor
-public class LogInResponseDto {
-    private String code;
-    private String message;
+open class LogInResponseDto(
+    val code: String = ResponseCode.SUCCESS,
+    val message: String = ResponseMessage.SUCCESS
+) {
+    companion object {
+        fun success(): ResponseEntity<LogInResponseDto> {
+            val responseBody = LogInResponseDto()
+            return ResponseEntity.status(HttpStatus.OK).body(responseBody)
+        }
 
-    public LogInResponseDto() {
-        this.code = ResponseCode.SUCCESS;
-        this.message = ResponseMessage.SUCCESS;
+        fun databaseError(): ResponseEntity<LogInResponseDto> {
+            val responseBody = LogInResponseDto(ResponseCode.DATABASE_ERROR, ResponseMessage.DATABASE_ERROR)
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody)
+        }
+
+        fun validationFail(): ResponseEntity<LogInResponseDto> {
+            val responseBody = LogInResponseDto(ResponseCode.VALIDATION_FAIL, ResponseMessage.VALIDATION_FAIL)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody)
+        }
     }
-
-    public static ResponseEntity<LogInResponseDto> success() {
-        LogInResponseDto responseBody = new LogInResponseDto();
-        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
-    }
-
-    public static ResponseEntity<LogInResponseDto> databaseError(){
-        LogInResponseDto responseBody = new LogInResponseDto(ResponseCode.DATABASE_ERROR, ResponseMessage.DATABASE_ERROR);
-        return ResponseEntity.status(500).body(responseBody); //500 Error == Internal Server Error
-    }
-
-    public static ResponseEntity<LogInResponseDto> validationFail(){
-        LogInResponseDto responseBody = new LogInResponseDto(ResponseCode.VALIDATION_FAIL, ResponseMessage.VALIDATION_FAIL);
-        return ResponseEntity.status(400).body(responseBody); //400 Error == Bad Request
-    }
-
 }
