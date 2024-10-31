@@ -2,7 +2,6 @@ package com.develetter.develetter.user.service.implement
 
 import com.develetter.develetter.user.global.common.Role
 import com.develetter.develetter.user.global.dto.request.*
-import com.develetter.develetter.user.global.dto.response.*
 import com.develetter.develetter.user.global.entity.CertificationEntity
 import com.develetter.develetter.user.provider.CertificationNumberProvider
 import com.develetter.develetter.user.provider.EmailProvider
@@ -27,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
 @Service
-class UserServiceImpl(
+open class UserServiceImpl(
     private val userRepository: UserRepository,
     private val certificationRepository: CertificationRepository,
     private val jwtProvider: JwtProvider,
