@@ -1,6 +1,6 @@
 package com.example.demo.user.global.dto.response
 
-import com.develetter.develetter.user.global.dto.LogInResponseDto
+import com.example.demo.user.global.dto.LogInResponseDto
 
 
 class RegisterSubscribeResponseDto : LogInResponseDto() {

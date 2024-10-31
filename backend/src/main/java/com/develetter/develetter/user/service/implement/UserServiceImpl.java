@@ -1,17 +1,16 @@
 package com.develetter.develetter.user.service.implement;
 
 import com.develetter.develetter.user.global.common.Role;
-import com.develetter.develetter.user.global.dto.LogInResponseDto;
 import com.develetter.develetter.user.global.dto.request.*;
 import com.develetter.develetter.user.global.dto.response.*;
 import com.develetter.develetter.user.global.entity.CertificationEntity;
 import com.develetter.develetter.user.global.entity.UserEntity;
-import com.develetter.develetter.user.provider.CertificationNumberProvider;
 import com.develetter.develetter.user.provider.EmailProvider;
 import com.develetter.develetter.user.provider.JwtProvider;
 import com.develetter.develetter.user.repository.CertificationRepository;
 import com.develetter.develetter.user.repository.UserRepository;
 import com.develetter.develetter.user.service.UserService;
+import com.example.demo.user.global.dto.response.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

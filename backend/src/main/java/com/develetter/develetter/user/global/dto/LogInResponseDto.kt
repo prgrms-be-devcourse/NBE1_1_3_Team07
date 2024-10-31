@@ -1,4 +1,4 @@
-package com.develetter.develetter.user.global.dto
+package com.example.demo.user.global.dto
 
 import com.develetter.develetter.user.global.common.ResponseCode
 import com.develetter.develetter.user.global.common.ResponseMessage
