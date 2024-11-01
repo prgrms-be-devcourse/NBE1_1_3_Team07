@@ -1,44 +1,35 @@
-package com.develetter.develetter.global.dto;
+package com.develetter.develetter.global.dto
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatus
+import java.time.LocalDateTime
 
-import java.time.LocalDateTime;
+data class ApiResponseDto<T>(
+    val status: Int = HttpStatus.OK.value(),
+    val message: String = "",
+    val data: T? = null,
+    val timeStamp: LocalDateTime = LocalDateTime.now()
+) {
+    @JvmOverloads
+    constructor(message: String, data: T? = null) : this(
+        status = HttpStatus.OK.value(),
+        message = message,
+        data = data,
+        timeStamp = LocalDateTime.now()
+    )
 
-@NoArgsConstructor
-@Getter
-public class ApiResponseDto<T> {
-    private Integer status;
-    private String message;
-    private T data;
-    private LocalDateTime timeStamp;
+    @JvmOverloads
+    constructor(status: Int, message: String, data: T? = null) : this(
+        status = status,
+        message = message,
+        data = data,
+        timeStamp = LocalDateTime.now()
+    )
 
-    public ApiResponseDto(String message, T data) {
-        this.status = HttpStatus.OK.value();
-        this.message = message;
-        this.data = data;
-        this.timeStamp = LocalDateTime.now();
-    }
-
-    public ApiResponseDto(Integer status, String message, T data) {
-        this.status = status;
-        this.message = message;
-        this.data = data;
-        this.timeStamp = LocalDateTime.now();
-    }
-
-    public ApiResponseDto(Integer status, String message) {
-        this.status = status;
-        this.message = message;
-        this.timeStamp = LocalDateTime.now();
-    }
-
-    public HttpStatus getHttpStatus() {
-        try{
-            return HttpStatus.valueOf(status);
-        }catch (IllegalArgumentException e){
-            return HttpStatus.INTERNAL_SERVER_ERROR;
+    fun getHttpStatus(): HttpStatus {
+        return try {
+            HttpStatus.valueOf(status)
+        } catch (e: IllegalArgumentException) {
+            HttpStatus.INTERNAL_SERVER_ERROR
         }
     }
 }
