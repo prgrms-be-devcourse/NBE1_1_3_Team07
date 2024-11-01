@@ -1,55 +1,48 @@
-package com.develetter.develetter.conference.entity;
+package com.develetter.develetter.conference.entity
 
-import com.develetter.develetter.conference.dto.ConferenceRegisterDto;
-import com.develetter.develetter.global.entity.BaseEntity;
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDate;
+import com.develetter.develetter.conference.dto.ConferenceRegisterDto
+import com.develetter.develetter.global.entity.BaseEntity
+import jakarta.persistence.*
+import lombok.AccessLevel
+import lombok.AllArgsConstructor
+import lombok.NoArgsConstructor
+import java.time.LocalDate
 
 @Entity
-@Getter
-@SuperBuilder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Table(name = "conference")
-public class Conference extends BaseEntity {
-
+class Conference(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    var id: Long? = null,
 
     @Column(name = "name", nullable = false)
-    private String name;
+    var name: String,
 
     @Column(name = "host", nullable = false)
-    private String host;
+    var host: String,
 
     @Column(name = "apply_start_date", nullable = false)
-    private LocalDate applyStartDate;
+    var applyStartDate: LocalDate,
 
     @Column(name = "apply_end_date", nullable = false)
-    private LocalDate applyEndDate;
+    var applyEndDate: LocalDate,
 
     @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
+    var startDate: LocalDate,
 
     @Column(name = "end_date", nullable = false)
-    private LocalDate endDate;
+    var endDate: LocalDate,
 
     @Column(name = "url", nullable = false)
-    private String url;
+    var url: String
+) : BaseEntity() {
 
-    public void updateConference(ConferenceRegisterDto dto) {
-        this.name = dto.name();
-        this.host = dto.host();
-        this.startDate = dto.startDate();
-        this.endDate = dto.endDate();
-        this.url = dto.url();
+    fun updateConference(dto: ConferenceRegisterDto) {
+        this.name = dto.name
+        this.host = dto.host
+        this.startDate = dto.startDate
+        this.endDate = dto.endDate
+        this.url = dto.url
     }
 }

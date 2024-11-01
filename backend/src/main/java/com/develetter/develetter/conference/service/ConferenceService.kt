@@ -1,20 +1,18 @@
-package com.develetter.develetter.conference.service;
+package com.develetter.develetter.conference.service
 
-import com.develetter.develetter.conference.dto.ConferenceRegisterDto;
-import com.develetter.develetter.conference.dto.ConferenceResDto;
-import jakarta.validation.Valid;
+import com.develetter.develetter.conference.dto.ConferenceRegisterDto
+import com.develetter.develetter.conference.dto.ConferenceResDto
+import jakarta.validation.Valid
+import java.time.LocalDate
 
-import java.time.LocalDate;
-import java.util.List;
+interface ConferenceService {
+    fun getAllConference(): List<ConferenceResDto>
 
-public interface ConferenceService {
-    List<ConferenceResDto> getAllConference();
+    fun getAllConferenceWithDateRange(start: LocalDate, end: LocalDate): List<ConferenceResDto>
 
-    List<ConferenceResDto> getAllConferenceWithDateRange(LocalDate start, LocalDate end);
+    fun createConference(@Valid conferenceRegisterDto: ConferenceRegisterDto)
 
-    void createConference(ConferenceRegisterDto conferenceRegisterDto);
+    fun updateConference(id: Long, @Valid conferenceRegisterDto: ConferenceRegisterDto)
 
-    void updateConference(Long id, ConferenceRegisterDto conferenceRegisterDto);
-
-    void deleteConference(Long id);
+    fun deleteConference(id: Long)
 }

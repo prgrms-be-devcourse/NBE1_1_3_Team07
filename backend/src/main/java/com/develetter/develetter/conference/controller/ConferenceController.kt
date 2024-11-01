@@ -1,43 +1,41 @@
-package com.develetter.develetter.conference.controller;
+package com.develetter.develetter.conference.controller
 
-import com.develetter.develetter.conference.dto.ConferenceRegisterDto;
-import com.develetter.develetter.conference.dto.ConferenceResDto;
-import com.develetter.develetter.conference.service.ConferenceServiceImpl;
-import com.develetter.develetter.global.dto.ApiResponseDto;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import com.develetter.develetter.conference.dto.ConferenceRegisterDto
+import com.develetter.develetter.conference.dto.ConferenceResDto
+import com.develetter.develetter.conference.service.ConferenceServiceImpl
+import com.develetter.develetter.global.dto.ApiResponseDto
+import jakarta.validation.Valid
+import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/conference")
-public class ConferenceController {
+class ConferenceController(
+    private val conferenceService: ConferenceServiceImpl
+) {
 
-    private final ConferenceServiceImpl conferenceService;
-
-    @GetMapping()
-    public ApiResponseDto<List<ConferenceResDto>> getAllConferences() {
-        return new ApiResponseDto<>(200, "컨퍼런스 조회 성공", conferenceService.getAllConference());
+    @GetMapping
+    fun getAllConferences(): ApiResponseDto<List<ConferenceResDto>> {
+        return ApiResponseDto(200, "컨퍼런스 조회 성공", conferenceService.getAllConference())
     }
 
-    @PostMapping()
-    public ApiResponseDto<Void> registerConference(@Valid @RequestBody ConferenceRegisterDto conferenceRegisterDto) {
-        conferenceService.createConference(conferenceRegisterDto);
-        return new ApiResponseDto<>(200, "컨퍼런스 생성 성공");
+    @PostMapping
+    fun registerConference(@Valid @RequestBody conferenceRegisterDto: ConferenceRegisterDto): ApiResponseDto<Void> {
+        conferenceService.createConference(conferenceRegisterDto)
+        return ApiResponseDto(200, "컨퍼런스 생성 성공")
     }
 
     @PutMapping("/{id}")
-    public ApiResponseDto<Void> updateConference(@PathVariable Long id, @Valid @RequestBody ConferenceRegisterDto conferenceRegisterDto) {
-        conferenceService.updateConference(id, conferenceRegisterDto);
-        return new ApiResponseDto<>(200, "컨퍼런스 수정 성공");
+    fun updateConference(
+        @PathVariable id: Long,
+        @Valid @RequestBody conferenceRegisterDto: ConferenceRegisterDto
+    ): ApiResponseDto<Void> {
+        conferenceService.updateConference(id, conferenceRegisterDto)
+        return ApiResponseDto(200, "컨퍼런스 수정 성공")
     }
 
     @DeleteMapping("/{id}")
-    public ApiResponseDto<Void> deleteConference(@PathVariable Long id) {
-        conferenceService.deleteConference(id);
-        return new ApiResponseDto<>(200, "컨퍼런스 삭제 성공");
+    fun deleteConference(@PathVariable id: Long): ApiResponseDto<Void> {
+        conferenceService.deleteConference(id)
+        return ApiResponseDto(200, "컨퍼런스 삭제 성공")
     }
-
 }

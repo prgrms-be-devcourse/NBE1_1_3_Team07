@@ -1,15 +1,14 @@
-package com.develetter.develetter.conference.dto;
+package com.develetter.develetter.conference.dto
 
-import java.time.LocalDate;
+import java.time.LocalDate
 
-public record ConferenceResDto(
-        Long id,
-        String name,
-        String host,
-        LocalDate applyStartDate,
-        LocalDate applyEndDate,
-        LocalDate startDate,
-        LocalDate endDate,
-        String url
-) {
-}
+data class ConferenceResDto(
+    val id: Long,
+    var name: String,
+    var host: String,
+    var applyStartDate: LocalDate,
+    var applyEndDate: LocalDate,
+    var startDate: LocalDate,
+    var endDate: LocalDate,
+    var url: String
+)

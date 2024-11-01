@@ -1,64 +1,49 @@
-package com.develetter.develetter.conference.service;
+package com.develetter.develetter.conference.service
 
-import com.develetter.develetter.conference.converter.Converter;
-import com.develetter.develetter.conference.dto.ConferenceRegisterDto;
-import com.develetter.develetter.conference.dto.ConferenceResDto;
-import com.develetter.develetter.conference.entity.Conference;
-import com.develetter.develetter.conference.repository.ConferenceRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.develetter.develetter.conference.converter.Converter
+import com.develetter.develetter.conference.dto.ConferenceRegisterDto
+import com.develetter.develetter.conference.dto.ConferenceResDto
+import com.develetter.develetter.conference.entity.Conference
+import com.develetter.develetter.conference.repository.ConferenceRepository
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDate
 
 @Service
-@RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class ConferenceServiceImpl implements ConferenceService {
+class ConferenceServiceImpl(
+    private val conferenceRepository: ConferenceRepository
+) : ConferenceService {
 
-    private final ConferenceRepository conferenceRepository;
-
-    @Override
-    public List<ConferenceResDto> getAllConference() {
-
-        return conferenceRepository.findAll()
-                .stream().map(Converter::toDto)
-                .toList();
+    override fun getAllConference(): List<ConferenceResDto> {
+        return conferenceRepository.findAll().map { Converter.toDto(it) }
     }
 
-    @Override
-    public List<ConferenceResDto> getAllConferenceWithDateRange(LocalDate start, LocalDate end) {
-        List<Conference> conferences = conferenceRepository.findByDateRange(start, end);
-        return conferences.stream()
-                .map(Converter::toDto)
-                .collect(Collectors.toList());
+    override fun getAllConferenceWithDateRange(start: LocalDate, end: LocalDate): List<ConferenceResDto> {
+        val conferences = conferenceRepository.findByDateRange(start, end)
+        return conferences.map { Converter.toDto(it) }
     }
 
     @Transactional
-    @Override
-    public void createConference(ConferenceRegisterDto conferenceRegisterDto) {
-        Conference conference = Converter.toEntity(conferenceRegisterDto);
-        conferenceRepository.save(conference);
+    override fun createConference(conferenceRegisterDto: ConferenceRegisterDto) {
+        val conference = Converter.toEntity(conferenceRegisterDto)
+        conferenceRepository.save(conference)
     }
 
     @Transactional
-    @Override
-    public void updateConference(Long id, ConferenceRegisterDto conferenceRegisterDto) {
-        Conference findConference = conferenceRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 컨퍼런스를 찾을 수 없습니다. " + id));
+    override fun updateConference(id: Long, conferenceRegisterDto: ConferenceRegisterDto) {
+        val findConference = conferenceRepository.findById(id)
+            .orElseThrow { IllegalArgumentException("해당 ID의 컨퍼런스를 찾을 수 없습니다. $id") }
 
-        findConference.updateConference(conferenceRegisterDto);
+        findConference.updateConference(conferenceRegisterDto)
     }
 
     @Transactional
-    @Override
-    public void deleteConference(Long id) {
+    override fun deleteConference(id: Long) {
         if (!conferenceRepository.existsById(id)) {
-            throw new IllegalArgumentException("해당 ID의 컨퍼런스를 찾을 수 없습니다. " + id);
+            throw IllegalArgumentException("해당 ID의 컨퍼런스를 찾을 수 없습니다. $id")
         }
 
-        conferenceRepository.deleteById(id);
+        conferenceRepository.deleteById(id)
     }
 }
