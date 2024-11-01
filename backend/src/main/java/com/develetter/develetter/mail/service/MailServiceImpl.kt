@@ -14,7 +14,7 @@ open class MailServiceImpl(
 ) : MailService {
 
     @Transactional
-    override fun updateMailSendingCheck(id: Long) {
+    override fun updateMailSendingCheck(id: Long?) {
         val mail: Mail? = mailRepository.findById(id).orElse(null)
         if (mail != null) {
             mail.updateMailCheck()
@@ -25,7 +25,7 @@ open class MailServiceImpl(
     }
 
     @Transactional
-    override fun updateMailDeleted(id: Long) {
+    override fun updateMailDeleted(id: Long?) {
         val mail: Mail? = mailRepository.findById(id).orElse(null)
         if (mail != null) {
             mail.updateMailDelete()
