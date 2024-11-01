@@ -72,9 +72,9 @@ open class ConferenceCalendarService(
 
                 // 컨퍼런스 이벤트 추가
                 for (conference in conferenceList) {
-                    if (isDateInRange(currentDate, conference.applyStartDate(), conference.applyEndDate())) {
+                    if (isDateInRange(currentDate, conference.applyStartDate, conference.applyEndDate)) {
                         htmlContent.append("<div style='background-color: #ebddcc; margin: 2px 0; padding: 1px 2px; font-size: 11px; line-height: 1.2;'>")
-                            .append(conference.name())
+                            .append(conference.name)
                             .append("</div>")
                     }
                 }
@@ -93,10 +93,10 @@ open class ConferenceCalendarService(
         for (conference in conferenceList) {
             htmlContent.append("<div style='margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px;'>")
                 .append("<h4 style='margin: 0 0 10px 0; color: #553830'>")
-                .append(conference.name()).append(" | ").append(conference.host()).append("</h4>")
-                .append("<p style='margin: 5px 0;'>신청 기간: ").append(conference.applyStartDate()).append(" ~ ").append(conference.applyEndDate()).append("</p>")
-                .append("<p style='margin: 5px 0;'>진행 기간: ").append(conference.startDate()).append(" ~ ").append(conference.endDate()).append("</p>")
-                .append("<a href='").append(conference.url()).append("' style='color: #553830; text-decoration: none;'>&rarr; 자세히 보기</a>")
+                .append(conference.name).append(" | ").append(conference.host).append("</h4>")
+                .append("<p style='margin: 5px 0;'>신청 기간: ").append(conference.applyStartDate).append(" ~ ").append(conference.applyEndDate).append("</p>")
+                .append("<p style='margin: 5px 0;'>진행 기간: ").append(conference.startDate).append(" ~ ").append(conference.endDate).append("</p>")
+                .append("<a href='").append(conference.url).append("' style='color: #553830; text-decoration: none;'>&rarr; 자세히 보기</a>")
                 .append("</div>")
         }
 
