@@ -1,6 +1,5 @@
 package com.develetter.develetter.user.repository
 
-import com.example.demo.user.global.entity.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

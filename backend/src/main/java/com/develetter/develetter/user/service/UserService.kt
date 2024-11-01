@@ -1,14 +1,12 @@
-package com.develetter.develetter.user.service
-
-import com.develetter.develetter.user.global.dto.request.*
-import com.example.demo.user.global.dto.LogInResponseDto
-import com.example.demo.user.global.dto.response.CheckCertificationResponseDto
-import com.example.demo.user.global.dto.response.DeleteIdResponseDto
-import com.example.demo.user.global.dto.response.RegisterSubscribeResponseDto
-import com.example.demo.user.global.dto.response.SigninResponseDto
-import com.example.demo.user.global.dto.response.SignupResponseDto
-import com.example.demo.user.global.entity.UserEntity
+import com.develetter.develetter.user.global.dto.request.CheckCertificationRequestDto
+import com.develetter.develetter.user.global.dto.request.DeleteIdRequestDto
+import com.develetter.develetter.user.global.dto.request.EmailCertificationRequestDto
+import com.develetter.develetter.user.global.dto.request.IdCheckRequestDto
+import com.develetter.develetter.user.global.dto.request.RegisterSubscribeRequestDto
+import com.develetter.develetter.user.global.dto.request.SigninRequestDto
+import com.develetter.develetter.user.global.dto.request.SignupRequestDto
 import org.springframework.http.ResponseEntity
+
 
 interface UserService {
     fun idCheck(dto: IdCheckRequestDto): ResponseEntity<out LogInResponseDto>

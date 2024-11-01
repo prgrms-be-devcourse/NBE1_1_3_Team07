@@ -1,4 +1,3 @@
-package com.example.demo.user.global.entity
 
 import com.develetter.develetter.global.entity.BaseEntity
 import jakarta.persistence.*
