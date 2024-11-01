@@ -1,15 +1,8 @@
 package com.develetter.develetter.user.controller
 
 import com.develetter.develetter.user.global.dto.request.*
-import com.develetter.develetter.user.global.dto.response.*
 import com.develetter.develetter.user.service.UserService
-import com.example.demo.user.global.dto.response.CheckCertificationResponseDto
-import com.example.demo.user.global.dto.response.DeleteIdResponseDto
-import com.example.demo.user.global.dto.response.EmailCertificationResponseDto
-import com.example.demo.user.global.dto.response.IdCheckResponseDto
-import com.example.demo.user.global.dto.response.RegisterSubscribeResponseDto
-import com.example.demo.user.global.dto.response.SigninResponseDto
-import com.example.demo.user.global.dto.response.SignupResponseDto
+import com.example.demo.user.global.dto.LogInResponseDto
 import jakarta.validation.Valid
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.http.ResponseEntity
@@ -28,7 +21,7 @@ class UserController(
      */
     @Operation(summary = "ID 중복 체크", description = "ID 중복 체크하는 API")
     @PostMapping("/id-check")
-    fun idCheck(@RequestBody @Valid requestBody: IdCheckRequestDto): ResponseEntity<in IdCheckResponseDto>? {
+    fun idCheck(@RequestBody @Valid requestBody: IdCheckRequestDto): ResponseEntity<out LogInResponseDto> {
         val response = userService.idCheck(requestBody)
         log.info("[idCheck]: {id: ${requestBody.email}}")
         return response
@@ -39,7 +32,7 @@ class UserController(
      */
     @Operation(summary = "이메일 인증코드 발송", description = "이메일 인증코드 발송하는 API")
     @PostMapping("/email-certification")
-    fun emailCertification(@RequestBody @Valid requestBody: EmailCertificationRequestDto): ResponseEntity<in EmailCertificationResponseDto>? {
+    fun emailCertification(@RequestBody @Valid requestBody: EmailCertificationRequestDto): ResponseEntity<out LogInResponseDto> {
         val response = userService.emailCertification(requestBody)
         log.info("[emailCertification]: {id: ${requestBody.email}, email: ${requestBody.email}}")
         return response
@@ -50,7 +43,7 @@ class UserController(
      */
     @Operation(summary = "이메일 인증코드 검사", description = "이메일 인증코드 일치하는지 검사하는 API")
     @PostMapping("/check-certification")
-    fun checkCertification(@RequestBody @Valid requestBody: CheckCertificationRequestDto): ResponseEntity<in CheckCertificationResponseDto>? {
+    fun checkCertification(@RequestBody @Valid requestBody: CheckCertificationRequestDto): ResponseEntity<out LogInResponseDto> {
         val response = userService.checkCertification(requestBody)
         log.info("[checkCertification]: {id: ${requestBody.email}, email: ${requestBody.email}, certificationNumber: ${requestBody.certificationNumber}}")
         return response
@@ -61,7 +54,7 @@ class UserController(
      */
     @Operation(summary = "회원가입", description = "회원가입 하는 API")
     @PostMapping("/sign-up")
-    fun signUp(@RequestBody @Valid requestBody: SignupRequestDto): ResponseEntity<in SignupResponseDto>? {
+    fun signUp(@RequestBody @Valid requestBody: SignupRequestDto): ResponseEntity<out LogInResponseDto> {
         val response = userService.signUp(requestBody)
         log.info("[signUp]: {id: ${requestBody.email}, password: ${requestBody.password}, email: ${requestBody.email}, certificationNumber: ${requestBody.certificationNumber}}")
         return response
@@ -72,7 +65,7 @@ class UserController(
      */
     @Operation(summary = "로그인", description = "로그인 하는 API")
     @PostMapping("/sign-in")
-    fun signIn(@RequestBody @Valid requestBody: SigninRequestDto): ResponseEntity<in SigninResponseDto>? {
+    fun signIn(@RequestBody @Valid requestBody: SigninRequestDto): ResponseEntity<out LogInResponseDto> {
         val response = userService.signIn(requestBody)
         log.info("[signIn]: {id: ${requestBody.email}, password: ${requestBody.password}}")
         return response
@@ -83,7 +76,7 @@ class UserController(
      */
     @Operation(summary = "회원 탈퇴", description = "회원 탈퇴하는 API")
     @PostMapping("/delete-user")
-    fun deleteUser(@RequestBody @Valid requestBody: DeleteIdRequestDto): ResponseEntity<in DeleteIdResponseDto>? {
+    fun deleteUser(@RequestBody @Valid requestBody: DeleteIdRequestDto): ResponseEntity<out LogInResponseDto> {
         val response = userService.deleteId(requestBody)
         log.info("[deleteUser]: {id: ${requestBody.email}, password: ${requestBody.password}}")
         return response
@@ -94,7 +87,7 @@ class UserController(
      */
     @Operation(summary = "구독회원 설정", description = "구독회원을 설정하는 API")
     @PostMapping("/register-subscription")
-    fun registerSubscription(@RequestBody @Valid requestBody: RegisterSubscribeRequestDto): ResponseEntity<in RegisterSubscribeResponseDto>? {
+    fun registerSubscription(@RequestBody @Valid requestBody: RegisterSubscribeRequestDto): ResponseEntity<out LogInResponseDto> {
         val response = userService.registerSubscribe(requestBody)
         log.info("[registerSubscription]: {id: ${requestBody.userId}, subscribe: ${requestBody.subscribeType}}")
         return response

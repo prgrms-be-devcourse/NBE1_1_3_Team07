@@ -114,8 +114,6 @@ open class UserServiceImpl(
                     type = "general",
                     role = Role.USER,
                     subscription = "NO",
-                    createdAt = LocalDateTime.now(),
-                    updatedAt = LocalDateTime.now()
                 )
                 userRepository.save(userEntity)
                 certificationRepository.deleteByAccountId(accountId)
@@ -178,8 +176,6 @@ open class UserServiceImpl(
                 email = userEntity.email,
                 type = userEntity.type,
                 role = userEntity.role,
-                createdAt = LocalDateTime.now(),
-                updatedAt = LocalDateTime.now(),
                 subscription = subscribeType
             )
 

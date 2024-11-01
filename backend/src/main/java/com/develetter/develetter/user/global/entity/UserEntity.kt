@@ -30,11 +30,6 @@ class UserEntity(
     @Column(name = "subscription", nullable = false, length = 10)
     var subscription: String,
 
-    @Column(name = "created_at", nullable = false)
-    var createdAt: LocalDateTime = LocalDateTime.now(),
-
-    @Column(name = "updated_at", nullable = false)
-    var updatedAt: LocalDateTime = LocalDateTime.now()
 ) : BaseEntity() {
 
     // 기본 생성자 - JPA에서 사용
@@ -46,7 +41,5 @@ class UserEntity(
         type = "",
         role = "",
         subscription = "",
-        createdAt = LocalDateTime.now(),
-        updatedAt = LocalDateTime.now()
     )
 }
