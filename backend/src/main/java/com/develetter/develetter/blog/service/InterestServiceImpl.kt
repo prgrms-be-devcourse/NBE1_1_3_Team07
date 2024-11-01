@@ -5,23 +5,16 @@ import com.develetter.develetter.blog.entity.Blog
 import com.develetter.develetter.blog.entity.FilteredBlog
 import com.develetter.develetter.blog.repository.BlogRepository
 import com.develetter.develetter.blog.repository.FilteredBlogRepository
-import lombok.RequiredArgsConstructor
-import lombok.extern.slf4j.Slf4j
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
 import java.util.*
-import java.util.function.Predicate
 
+private val log = KotlinLogging.logger {}
 @Service
 class InterestServiceImpl(
     private val blogRepository: BlogRepository,
     private val filteredBlogRepository: FilteredBlogRepository
 ) : InterestService {
-
-    companion object {
-        private val log: Logger = LoggerFactory.getLogger(InterestServiceImpl::class.java)
-    }
 
     override fun getInterests() = listOf(
         "Java", "JavaScript", "AI" /*,"CSS", "TypeScript", "Html","Javascript", "Next.js",

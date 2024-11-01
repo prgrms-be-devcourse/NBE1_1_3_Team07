@@ -5,15 +5,15 @@ import com.develetter.develetter.blog.entity.Blog
 import com.develetter.develetter.blog.repository.BlogRepository
 import lombok.RequiredArgsConstructor
 import lombok.extern.slf4j.Slf4j
+import mu.KotlinLogging
 import org.json.JSONObject
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.util.UriComponentsBuilder
 import java.util.*
 
+private val log = KotlinLogging.logger {}
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -24,10 +24,8 @@ class SearchServiceImpl (
     private val blogRepository: BlogRepository
 ) : SearchService {
 
-    companion object {
-        private val log: Logger = LoggerFactory.getLogger(SearchServiceImpl::class.java)
-        private const val GOOGLE_SEARCH_URL = "https://www.googleapis.com/customsearch/v1"
-    }
+    val GOOGLE_SEARCH_URL = "https://www.googleapis.com/customsearch/v1"
+
     override fun searchAndSaveBlogPosts(query: String?) {
         var startIndex = 1 // 검색 결과의 시작 인덱스 (페이징 처리 위해서 사용)
         var savedCount = 0 // 저장된 블로그 글 개수

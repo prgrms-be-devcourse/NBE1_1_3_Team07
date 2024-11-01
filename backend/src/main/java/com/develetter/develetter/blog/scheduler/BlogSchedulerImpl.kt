@@ -7,19 +7,14 @@ import com.develetter.develetter.blog.repository.FilteredBlogRepository
 import com.develetter.develetter.blog.service.InterestService
 import com.develetter.develetter.blog.service.SearchService
 import com.develetter.develetter.userfilter.repository.UserFilterRepository
-import lombok.RequiredArgsConstructor
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-import org.springframework.batch.core.Job
-import org.springframework.batch.core.JobParametersBuilder
-import org.springframework.batch.core.launch.JobLauncher
+
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
-import java.util.function.Consumer
 import mu.KotlinLogging
 
+private val log = KotlinLogging.logger {}
 @Component
 class BlogSchedulerImpl(
     private val searchService: SearchService,
@@ -29,10 +24,9 @@ class BlogSchedulerImpl(
     private val filteredBlogRepository: FilteredBlogRepository
 ) : BlogScheduler {
 
-    private val log = KotlinLogging.logger {}
-
     // 매주 월요일 자정에 실행
     @Scheduled(cron = "0 0 0 * * MON")
+    //@Scheduled(fixedRate = 20000)
     @Transactional
     override fun fetchAndStoreBlogData() {
         filteredBlogRepository.deleteOldRecords()
