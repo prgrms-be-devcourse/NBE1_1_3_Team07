@@ -16,19 +16,19 @@ class GlobalExceptionHandler {
     @ExceptionHandler(BadRequestException::class)
     fun handleBadRequestException(e: BadRequestException, request: HttpServletRequest): ApiResponseDto<Void?> {
         log.error("BadRequestException: {}", e.message)
-        return ApiResponseDto(HttpStatus.BAD_REQUEST.value(), e.message, null)
+        return ApiResponseDto(HttpStatus.BAD_REQUEST.value(), e.message ?: "Invalid request", null)
     }
 
     @ExceptionHandler(IllegalArgumentException::class)
     fun handleIllegalArgumentException(e: IllegalArgumentException, request: HttpServletRequest): ApiResponseDto<Void?> {
         log.error("IllegalArgumentException: {}", e.message)
-        return ApiResponseDto(HttpStatus.BAD_REQUEST.value(), e.message, null)
+        return ApiResponseDto(HttpStatus.BAD_REQUEST.value(), e.message ?: "Invalid argument", null)
     }
 
     // 모든 예외 처리 (Global Exception Handler)
     @ExceptionHandler(Exception::class)
     fun handleAllExceptions(e: Exception, request: HttpServletRequest): ApiResponseDto<Void?> {
         log.error("Exception: {}", e.message)
-        return ApiResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), "An unexpected error occurred: ${e.message}", null)
+        return ApiResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), "An unexpected error occurred: ${e.message ?: "No details"}", null)
     }
 }
