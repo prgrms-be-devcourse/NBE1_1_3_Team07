@@ -7,8 +7,9 @@ import com.develetter.develetter.mail.service.ConferenceCalendarService
 import com.develetter.develetter.mail.service.MailService
 import com.develetter.develetter.user.global.entity.UserEntity
 import com.develetter.develetter.user.repository.UserRepository
-import mu.KotlinLogging
+import kotlinx.coroutines.*
 import org.springframework.batch.core.*
+import org.springframework.batch.core.Job
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.core.step.builder.StepBuilder
@@ -32,7 +33,7 @@ open class MailBatch(
     private val conferenceCalendarService: ConferenceCalendarService,
     private val asyncMailService: AsyncMailService,
     private val mailService: MailService
-) {
+) : CoroutineScope by CoroutineScope(Dispatchers.IO.limitedParallelism(5))  {
     private companion object {
         const val CHUNK_SIZE = 5
     }
@@ -107,9 +108,13 @@ open class MailBatch(
         val conferenceHtml = conferenceCalendarService.createConferenceCalendar()
 
         return ItemProcessor { mail ->
-            asyncMailService.sendMail(mail, conferenceHtml.toString())
-            mailService.updateMailDeleted(mail.id!!)
-
+            launch {
+                try {
+                    asyncMailService.sendMail(mail, conferenceHtml.toString())
+                } catch (_: Exception) {
+                }
+                mailService.updateMailDeleted(mail.id)
+            }
             mail
         }
     }

@@ -6,11 +6,10 @@ import com.develetter.develetter.jobposting.service.JobPostingService
 import com.develetter.develetter.mail.entity.Mail
 import com.develetter.develetter.user.service.UserService
 import jakarta.mail.internet.MimeMessage
+import kotlinx.coroutines.*
 import mu.KotlinLogging
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
-import org.springframework.scheduling.annotation.Async
-import org.springframework.scheduling.annotation.EnableAsync
 import org.springframework.stereotype.Service
 import org.thymeleaf.context.Context
 import org.thymeleaf.spring6.SpringTemplateEngine
@@ -21,7 +20,6 @@ import java.time.temporal.WeekFields
 private val log = KotlinLogging.logger {}
 
 @Service
-@EnableAsync
 open class AsyncMailService(
     private val javaMailSender: JavaMailSender,
     private val templateEngine: SpringTemplateEngine,
@@ -32,10 +30,10 @@ open class AsyncMailService(
     private val jobPostingCalendarService: JobPostingCalendarService
 ) {
 
-    @Async
-    open// 메일 전송 메서드
-    fun sendMail(mail: Mail, conferenceHtml: String) {
+    //코루틴을 사용한 비동기 메일 전송 메서드
+    suspend fun sendMail(mail: Mail, conferenceHtml: String) = coroutineScope {
         val userId = mail.userId
+        val mailId = mail.id
         try {
             val email = userService.getEmailByUserId(userId)
 
@@ -46,11 +44,11 @@ open class AsyncMailService(
             sendMimeMessage(email, mailContent)
 
             // 메일 발송 완료 체크
-            mailService.updateMailSendingCheck(mail.id!!)
-            log.info("Send Mail Success for User ID: ${mail.id}")
+             mailService.updateMailSendingCheck(mailId)
 
+            log.info { "Successfully sent mail to ${mailId}" }
         } catch (e: Exception) {
-            log.error("Failed Send Mail, Resend Mail for User ID: ${mail.id}")
+            log.error("Failed Send Mail, Resend Mail for User ID : ${mailId}")
 
             val email = userService.getEmailByUserId(userId)
 
@@ -61,14 +59,16 @@ open class AsyncMailService(
             sendMimeMessage(email, mailContent)
 
             // 메일 발송 완료 체크
-            mailService.updateMailSendingCheck(mail.id!!)
+            mailService.updateMailSendingCheck(mailId)
+
+            log.info { "Successfully resent mail to ${mailId}" }
         }
     }
 
     private fun createMailContent(userId: Long, conferenceHtml: String): String {
         val jobPostingList = jobPostingService.getFilteredJobPostingsByUserId(userId)
-        val blog = blogService.getBlogByUserId(userId)
-        val jobPostingHtml = jobPostingCalendarService.createJobPostingCalendar(jobPostingList)
+        val blog = blogService.getBlogByUserId(userId) ?: BlogDto("우아한 기술블로그", "https://techblog.woowahan.com")
+        val jobPostingHtml = jobPostingCalendarService.createJobPostingCalendar(jobPostingList!!)
         val date = getWeekOfMonth(LocalDate.now())
 
         return setContext(date, jobPostingHtml.toString(), blog, conferenceHtml)
@@ -84,7 +84,7 @@ open class AsyncMailService(
     }
 
     // 날짜 (ex. 9월 둘째주) 가져오는 메서드
-    fun getWeekOfMonth(localDate: LocalDate): String {
+    private fun getWeekOfMonth(localDate: LocalDate): String {
         // 한 주의 시작은 월요일이고, 첫 주에 4일이 포함되어있어야 첫 주 취급 (목/금/토/일)
         val weekFields = WeekFields.of(DayOfWeek.MONDAY, 4)
         val weekOfMonth = localDate.get(weekFields.weekOfMonth())
@@ -108,7 +108,7 @@ open class AsyncMailService(
     }
 
     // thymeleaf를 통한 mail.html 적용
-    fun setContext(date: String, jobPostingHtml: String, blogDto: BlogDto, conferenceHtml: String): String {
+    private fun setContext(date: String, jobPostingHtml: String, blogDto: BlogDto, conferenceHtml: String): String {
         val context = Context().apply {
             setVariable("date", date)
             setVariable("jobPostingHtml", jobPostingHtml)
