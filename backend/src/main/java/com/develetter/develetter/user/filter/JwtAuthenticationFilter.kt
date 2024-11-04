@@ -1,8 +1,8 @@
 package com.develetter.develetter.user.filter
 
+import com.develetter.develetter.user.global.entity.UserEntity
 import com.develetter.develetter.user.provider.JwtProvider
 import com.develetter.develetter.user.repository.UserRepository
-import com.example.demo.user.global.entity.UserEntity
 import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletException
 import jakarta.servlet.http.HttpServletRequest

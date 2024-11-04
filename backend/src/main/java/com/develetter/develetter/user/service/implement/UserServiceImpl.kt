@@ -1,19 +1,23 @@
+package com.develetter.develetter.user.service.implement
+
 import com.develetter.develetter.user.global.common.Role
+import com.develetter.develetter.user.global.dto.LogInResponseDto
 import com.develetter.develetter.user.global.dto.response.*
 import com.develetter.develetter.user.global.dto.request.*
 import com.develetter.develetter.user.global.entity.CertificationEntity
+import com.develetter.develetter.user.global.entity.UserEntity
 import com.develetter.develetter.user.provider.CertificationNumberProvider
 import com.develetter.develetter.user.provider.EmailProvider
 import com.develetter.develetter.user.provider.JwtProvider
 import com.develetter.develetter.user.repository.CertificationRepository
 import com.develetter.develetter.user.repository.UserRepository
+import com.develetter.develetter.user.service.UserService
 import jakarta.transaction.Transactional
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
 
 @Service
 class UserServiceImpl(
@@ -26,7 +30,7 @@ class UserServiceImpl(
     private val passwordEncoder: PasswordEncoder = BCryptPasswordEncoder()
     private val log = LoggerFactory.getLogger(UserServiceImpl::class.java)
 
-    override fun idCheck(dto: IdCheckRequestDto): ResponseEntity<out LogInResponseDto> {
+    override fun idCheck(dto: IdCheckRequestDto): ResponseEntity<LogInResponseDto> {
         return try {
             val accountId = dto.email
             if (userRepository.existsByAccountId(accountId)) {
@@ -83,7 +87,7 @@ class UserServiceImpl(
     }
 
     @Transactional
-    override fun signUp(dto: SignupRequestDto): ResponseEntity<out LogInResponseDto> {
+    override fun signUp(dto: SignupRequestDto): ResponseEntity<out LogInResponseDto?> {
         return try {
             val accountId = dto.email
             if (userRepository.existsByAccountId(accountId)) {
@@ -109,14 +113,14 @@ class UserServiceImpl(
             )
             userRepository.save(userEntity)
             certificationRepository.deleteByAccountId(accountId)
-            SignupResponseDto.success(Role.USER)
+            LogInResponseDto.success()
         } catch (e: Exception) {
             log.info("회원 가입 실패: {}", e.message)
             LogInResponseDto.databaseError()
         }
     }
 
-    override fun signIn(dto: SigninRequestDto): ResponseEntity<out LogInResponseDto> {
+    override fun signIn(dto: SigninRequestDto): ResponseEntity<out LogInResponseDto?> {
         return try {
             val accountId = dto.email
             val userEntity = userRepository.findByAccountId(accountId)
@@ -153,29 +157,29 @@ class UserServiceImpl(
         }
     }
 
-    override fun registerSubscribe(dto: RegisterSubscribeRequestDto): ResponseEntity<out LogInResponseDto> {
-        return try {
-            val userEntity = userRepository.findById(dto.userId)
-            val updateUserEntity = UserEntity(
-                accountId = userEntity.accountId,
-                password = userEntity.password,
-                email = userEntity.email,
-                type = userEntity.type,
-                role = userEntity.role,
-                subscription = dto.subscribeType,
-            )
-            userRepository.save(updateUserEntity)
-            LogInResponseDto.success()
-        } catch (e: Exception) {
-            log.info("구독 등록 실패: {}", e.message)
-            LogInResponseDto.databaseError()
-        }
-    }
-
-    override fun getEmailByUserId(id: Long): String {
-        val user = userRepository.findById(id)
-        return user.email
-    }
+//    override fun registerSubscribe(dto: RegisterSubscribeRequestDto): ResponseEntity<out LogInResponseDto> {
+//        return try {
+//            val userEntity = userRepository.findById(dto.userId)
+//            val updateUserEntity = UserEntity(
+//                accountId = userEntity.accountId,
+//                password = userEntity.password,
+//                email = userEntity.email,
+//                type = userEntity.type,
+//                role = userEntity.role,
+//                subscription = dto.subscribeType,
+//            )
+//            userRepository.save(updateUserEntity)
+//            LogInResponseDto.success()
+//        } catch (e: Exception) {
+//            log.info("구독 등록 실패: {}", e.message)
+//            LogInResponseDto.databaseError()
+//        }
+//    }
+//
+//    override fun getEmailByUserId(id: Long): String {
+//        val user = userRepository.findById(id)
+//        return user.email
+//    }
 
     override fun getAllUsers(): List<UserEntity> {
         return userRepository.findAll()
