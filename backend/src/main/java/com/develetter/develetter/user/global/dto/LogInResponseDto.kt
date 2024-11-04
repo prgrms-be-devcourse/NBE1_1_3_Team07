@@ -1,5 +1,3 @@
-package com.example.demo.user.global.dto
-
 import com.develetter.develetter.user.global.common.ResponseCode
 import com.develetter.develetter.user.global.common.ResponseMessage
 import org.springframework.http.HttpStatus
