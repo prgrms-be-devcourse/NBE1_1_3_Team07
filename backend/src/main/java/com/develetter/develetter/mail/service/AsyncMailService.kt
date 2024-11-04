@@ -72,7 +72,7 @@ open class AsyncMailService(
     private fun createMailContent(userId: Long?, conferenceHtml: String): String {
         val jobPostingList = jobPostingService.getFilteredJobPostingsByUserId(userId)
         val blog = blogService.getBlogByUserId(userId) ?: BlogDto("우아한 기술블로그", "https://techblog.woowahan.com")
-        val jobPostingHtml = jobPostingCalendarService.createJobPostingCalendar(jobPostingList!!)
+        val jobPostingHtml = jobPostingCalendarService.createJobPostingCalendar(jobPostingList)
         val date = getWeekOfMonth(LocalDate.now())
 
         return setContext(date, jobPostingHtml.toString(), blog, conferenceHtml)
