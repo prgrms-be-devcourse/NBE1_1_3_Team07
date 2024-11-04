@@ -1,7 +1,7 @@
+package com.develetter.develetter.user.global.entity
 
 import com.develetter.develetter.global.entity.BaseEntity
 import jakarta.persistence.*
-import java.time.LocalDateTime
 
 @Entity
 @Table(name = "user")

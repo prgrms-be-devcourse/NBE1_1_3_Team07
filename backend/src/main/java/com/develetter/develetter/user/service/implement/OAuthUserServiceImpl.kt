@@ -1,7 +1,7 @@
 package com.develetter.develetter.user.service.implement
 
-import UserEntity
 import com.develetter.develetter.user.global.entity.CustomOAuthUser
+import com.develetter.develetter.user.global.entity.UserEntity
 import com.develetter.develetter.user.repository.UserRepository
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
