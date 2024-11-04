@@ -38,22 +38,7 @@ open class AsyncMailService(
             val email = userService.getEmailByUserId(userId)
 
             // 메일 컨텐츠 구성
-            val mailContent = createMailContent(mail.userId, conferenceHtml)
-
-            // 이메일 전송
-            sendMimeMessage(email, mailContent)
-
-            // 메일 발송 완료 체크
-             mailService.updateMailSendingCheck(mailId)
-
-            log.info { "Successfully sent mail to ${mailId}" }
-        } catch (e: Exception) {
-            log.error("Failed Send Mail, Resend Mail for User ID : ${mailId}")
-
-            val email = userService.getEmailByUserId(userId)
-
-            // 메일 컨텐츠 구성
-            val mailContent = createMailContent(mail.userId, conferenceHtml)
+            val mailContent = createMailContent(userId, conferenceHtml)
 
             // 이메일 전송
             sendMimeMessage(email, mailContent)
@@ -61,11 +46,30 @@ open class AsyncMailService(
             // 메일 발송 완료 체크
             mailService.updateMailSendingCheck(mailId)
 
-            log.info { "Successfully resent mail to ${mailId}" }
+            log.info { "Successfully sent mail to ${mailId}" }
+        } catch (e: Exception) {
+            log.error("Failed Send Mail, Resend Mail for User ID : ${mailId}")
+
+            if(!mailService.isMailSent(mailId)) {
+                val email = userService.getEmailByUserId(userId)
+
+                mailService.updateMailDeleted(mailId)
+
+                // 메일 컨텐츠 구성
+                val mailContent = createMailContent(userId, conferenceHtml)
+
+                // 이메일 전송
+                sendMimeMessage(email, mailContent)
+
+                // 메일 발송 완료 체크
+                mailService.updateMailSendingCheck(mailId)
+
+                log.info { "Successfully resent mail to ${mailId}" }
+            }
         }
     }
 
-    private fun createMailContent(userId: Long, conferenceHtml: String): String {
+    private fun createMailContent(userId: Long?, conferenceHtml: String): String {
         val jobPostingList = jobPostingService.getFilteredJobPostingsByUserId(userId)
         val blog = blogService.getBlogByUserId(userId) ?: BlogDto("우아한 기술블로그", "https://techblog.woowahan.com")
         val jobPostingHtml = jobPostingCalendarService.createJobPostingCalendar(jobPostingList!!)
@@ -118,3 +122,5 @@ open class AsyncMailService(
         return templateEngine.process("email", context)
     }
 }
+
+

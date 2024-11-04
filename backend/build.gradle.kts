@@ -3,10 +3,7 @@ plugins {
 	id("org.springframework.boot") version "3.3.4"
 	id("io.spring.dependency-management") version "1.1.6"
 	id("org.asciidoctor.jvm.convert") version "3.3.2"
-	kotlin("jvm") version "2.0.21"
-	id("org.jetbrains.kotlin.plugin.spring") version "1.8.10" // all-open, no-arg 플러그인
-	id("org.jetbrains.kotlin.plugin.jpa") version "1.9.25"
-	id("org.jetbrains.kotlin.kapt") version "2.0.21"
+	kotlin("jvm")
 }
 
 group = "com.develetter"
@@ -54,18 +51,12 @@ dependencies {
 	testImplementation("org.springframework.security:spring-security-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-	// QueryDsl with KAPT
+	// QueryDsl
 	implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
-	kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
-	kapt("jakarta.annotation:jakarta.annotation-api")
-	kapt("jakarta.persistence:jakarta.persistence-api")
+	annotationProcessor("com.querydsl:querydsl-apt:5.0.0:jakarta")
+	annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+	annotationProcessor("jakarta.persistence:jakarta.persistence-api")
 
-	// Kotlin and Jackson
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.+")
-
-	// JWT
 	implementation("io.jsonwebtoken:jjwt-api:0.11.2")
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.2")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.2")
@@ -76,7 +67,9 @@ dependencies {
 	// Redis
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
-	// Additional Kotlin logging library
+	//kotlin
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("io.github.microutils:kotlin-logging:3.0.0")
 
 	//coroutine
@@ -95,7 +88,9 @@ tasks.named("asciidoctor") {
 }
 
 configurations {
+	// 기존 Groovy DSL에서 compileOnly extendsFrom annotationProcessor를 대체
 	named("compileOnly") {
 		extendsFrom(configurations.annotationProcessor.get())
 	}
 }
+

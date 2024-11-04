@@ -34,4 +34,16 @@ open class MailServiceImpl(
             log.error("Could not deleted with id {}", id)
         }
     }
+
+    @Transactional
+    override fun isMailSent(id: Long?): Boolean {
+        val mail: Mail? = mailRepository.findById(id).orElse(null)
+        if (mail == null) {
+            log.error("Could not sent with id {}", id)
+            return false
+        } else {
+            return mail.sendingCheck
+        }
+    }
 }
+
