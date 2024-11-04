@@ -7,5 +7,5 @@ interface JobPostingService {
 
     fun searchJobs(startIdx: Int, sevenDaysAgo: String): JobSearchResDto
 
-    fun getFilteredJobPostingsByUserId(userId: Long): List<JobPostingEmailDto>?
+    fun getFilteredJobPostingsByUserId(userId: Long?): List<JobPostingEmailDto>?
 }

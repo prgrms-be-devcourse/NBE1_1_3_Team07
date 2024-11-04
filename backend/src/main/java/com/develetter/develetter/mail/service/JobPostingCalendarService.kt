@@ -12,7 +12,7 @@ private val log = KotlinLogging.logger {}
 @Transactional(readOnly = true)
 open class JobPostingCalendarService {
     @Transactional
-    open fun createJobPostingCalendar(jobPostingList: List<JobPostingEmailDto>): String? {
+    open fun createJobPostingCalendar(jobPostingList: List<JobPostingEmailDto>?): String? {
         try {
             return generateCalendarHtml(jobPostingList)
         } catch (e: Exception) {
@@ -21,7 +21,7 @@ open class JobPostingCalendarService {
         return null
     }
 
-    fun generateCalendarHtml(jobPostingList: List<JobPostingEmailDto>): String {
+    fun generateCalendarHtml(jobPostingList: List<JobPostingEmailDto>?): String {
         val htmlContent = StringBuilder()
 
         htmlContent.append("<div style='max-width: 950px; margin: 0 auto; font-family: Arial, sans-serif;'>")
@@ -64,16 +64,18 @@ open class JobPostingCalendarService {
                     .append("</div>")
 
                 // 채용 공고 이벤트 추가
-                for (jobPosting in jobPostingList) {
-                    if (isDateInRange(
-                            currentDate,
-                            jobPosting.postingDate.toLocalDate(),
-                            jobPosting.expirationDate.toLocalDate()
-                        )
-                    ) {
-                        htmlContent.append("<div style='background-color: #CCDEF0; margin: 2px 0; padding: 1px 2px; font-size: 11px; line-height: 1.2;'>")
-                            .append(jobPosting.title).append(" | ").append(jobPosting.companyName)
-                            .append("</div>")
+                if (jobPostingList != null) {
+                    for (jobPosting in jobPostingList) {
+                        if (isDateInRange(
+                                currentDate,
+                                jobPosting.postingDate.toLocalDate(),
+                                jobPosting.expirationDate.toLocalDate()
+                            )
+                        ) {
+                            htmlContent.append("<div style='background-color: #CCDEF0; margin: 2px 0; padding: 1px 2px; font-size: 11px; line-height: 1.2;'>")
+                                .append(jobPosting.title).append(" | ").append(jobPosting.companyName)
+                                .append("</div>")
+                        }
                     }
                 }
 
@@ -88,19 +90,21 @@ open class JobPostingCalendarService {
         htmlContent.append("<div style='margin-top: 20px;'>")
             .append("<h2 style='color: #004EA2; font-size: medium'>채용 공고 상세 정보</h2>")
 
-        for (jobPosting in jobPostingList) {
-            htmlContent.append("<div style='margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px;'>")
-                .append("<h4 style='margin: 0 0 10px 0; color: #004EA2'>")
-                .append(jobPosting.title).append(" | ").append(jobPosting.companyName).append("</a></h4>")
-                .append("<p style='margin: 5px 0;'>산업 이름: ").append(jobPosting.industryName).append("</p>")
-                .append("<p style='margin: 5px 0;'>경력 요건: ").append(jobPosting.experienceName).append("</p>")
-                .append("<p style='margin: 5px 0;'>직무 형태: ").append(jobPosting.jobTypeName).append("</p>")
-                .append("<p style='margin: 5px 0;'>근무지: ").append(jobPosting.locationName).append("</p>")
-                .append("<p style='margin: 5px 0;'>공고 기간: ").append(jobPosting.postingDate.toLocalDate()).append(" ~ ")
-                .append(jobPosting.expirationDate.toLocalDate()).append("</p>")
-                .append("<a href='").append(jobPosting.url)
-                .append("' style='color: #004EA2; text-decoration: none;'>&rarr; 자세히 보기</a>")
-                .append("</div>")
+        if (jobPostingList != null) {
+            for (jobPosting in jobPostingList) {
+                htmlContent.append("<div style='margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px;'>")
+                    .append("<h4 style='margin: 0 0 10px 0; color: #004EA2'>")
+                    .append(jobPosting.title).append(" | ").append(jobPosting.companyName).append("</a></h4>")
+                    .append("<p style='margin: 5px 0;'>산업 이름: ").append(jobPosting.industryName).append("</p>")
+                    .append("<p style='margin: 5px 0;'>경력 요건: ").append(jobPosting.experienceName).append("</p>")
+                    .append("<p style='margin: 5px 0;'>직무 형태: ").append(jobPosting.jobTypeName).append("</p>")
+                    .append("<p style='margin: 5px 0;'>근무지: ").append(jobPosting.locationName).append("</p>")
+                    .append("<p style='margin: 5px 0;'>공고 기간: ").append(jobPosting.postingDate.toLocalDate()).append(" ~ ")
+                    .append(jobPosting.expirationDate.toLocalDate()).append("</p>")
+                    .append("<a href='").append(jobPosting.url)
+                    .append("' style='color: #004EA2; text-decoration: none;'>&rarr; 자세히 보기</a>")
+                    .append("</div>")
+            }
         }
 
         htmlContent.append("</div></div>")

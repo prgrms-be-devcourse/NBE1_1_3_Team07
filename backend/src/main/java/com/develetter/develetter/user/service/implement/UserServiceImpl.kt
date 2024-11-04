@@ -176,10 +176,10 @@ class UserServiceImpl(
 //        }
 //    }
 //
-//    override fun getEmailByUserId(id: Long): String {
-//        val user = userRepository.findById(id)
-//        return user.email
-//    }
+    override fun getEmailByUserId(id: Long?): String {
+        val user = userRepository.findById(id)
+        return user!!.email
+    }
 
     override fun getAllUsers(): List<UserEntity> {
         return userRepository.findAll()

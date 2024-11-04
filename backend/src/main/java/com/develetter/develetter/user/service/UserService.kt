@@ -19,6 +19,6 @@ interface UserService {
     fun signIn(dto: SigninRequestDto): ResponseEntity<out LogInResponseDto>
     fun deleteId(dto: DeleteIdRequestDto): ResponseEntity<out LogInResponseDto>
 //    fun registerSubscribe(dto: RegisterSubscribeRequestDto): ResponseEntity<out LogInResponseDto>
-//    fun getEmailByUserId(id: Long): String
+    fun getEmailByUserId(id: Long?): String
     fun getAllUsers(): List<UserEntity>
 }

@@ -1,12 +1,9 @@
 package com.develetter.develetter.jobposting.service
 
-import com.develetter.develetter.global.util.DtoUtil
 import com.develetter.develetter.jobposting.converter.Converter
 import com.develetter.develetter.jobposting.dto.JobPostingEmailDto
 import com.develetter.develetter.jobposting.dto.JobSearchParams
 import com.develetter.develetter.jobposting.dto.JobSearchResDto
-import com.develetter.develetter.jobposting.entity.FilteredJobPosting
-import com.develetter.develetter.jobposting.entity.JobPosting
 import com.develetter.develetter.jobposting.exception.JobSearchException
 import com.develetter.develetter.jobposting.repository.FilteredJobPostingRepository
 import com.develetter.develetter.jobposting.repository.JobPostingRepository
@@ -75,7 +72,7 @@ class JobPostingServiceImpl(
         }
     }
 
-    override fun getFilteredJobPostingsByUserId(userId: Long): List<JobPostingEmailDto>? {
+    override fun getFilteredJobPostingsByUserId(userId: Long?): List<JobPostingEmailDto>? {
         val filteredJobPosting = filteredJobPostingRepository.findByUserId(userId).orElse(null)
             ?: return null
 
