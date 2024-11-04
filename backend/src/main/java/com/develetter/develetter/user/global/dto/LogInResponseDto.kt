@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity
 
 open class LogInResponseDto(
     val code: String = ResponseCode.SUCCESS,
-    val message: String = ResponseMessage.SUCCESS
+    val message: String = ResponseMessage.SUCCESS//
 ) {
     companion object {
         fun success(): ResponseEntity<LogInResponseDto> {
