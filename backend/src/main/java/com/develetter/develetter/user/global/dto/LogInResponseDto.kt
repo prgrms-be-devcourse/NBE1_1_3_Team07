@@ -1,4 +1,4 @@
-package com.example.demo.user.global.dto
+package com.develetter.develetter.user.global.dto
 
 import com.develetter.develetter.user.global.common.ResponseCode
 import com.develetter.develetter.user.global.common.ResponseMessage
@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity
 
 open class LogInResponseDto(
     val code: String = ResponseCode.SUCCESS,
-    val message: String = ResponseMessage.SUCCESS
+    val message: String = ResponseMessage.SUCCESS//
 ) {
     companion object {
         fun success(): ResponseEntity<LogInResponseDto> {
