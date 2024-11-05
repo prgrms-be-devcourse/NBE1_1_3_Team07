@@ -1,12 +1,7 @@
 package com.develetter.develetter.user.service
 
 import com.develetter.develetter.user.global.dto.LogInResponseDto
-import com.develetter.develetter.user.global.dto.request.CheckCertificationRequestDto
-import com.develetter.develetter.user.global.dto.request.DeleteIdRequestDto
-import com.develetter.develetter.user.global.dto.request.EmailCertificationRequestDto
-import com.develetter.develetter.user.global.dto.request.IdCheckRequestDto
-import com.develetter.develetter.user.global.dto.request.SigninRequestDto
-import com.develetter.develetter.user.global.dto.request.SignupRequestDto
+import com.develetter.develetter.user.global.dto.request.*
 import org.springframework.http.ResponseEntity
 import com.develetter.develetter.user.global.entity.UserEntity
 
@@ -18,7 +13,7 @@ interface UserService {
     fun signUp(dto: SignupRequestDto): ResponseEntity<out LogInResponseDto?>
     fun signIn(dto: SigninRequestDto): ResponseEntity<out LogInResponseDto>
     fun deleteId(dto: DeleteIdRequestDto): ResponseEntity<out LogInResponseDto>
-//    fun registerSubscribe(dto: RegisterSubscribeRequestDto): ResponseEntity<out LogInResponseDto>
+    fun registerSubscribe(dto: RegisterSubscribeRequestDto): ResponseEntity<out LogInResponseDto>
     fun getEmailByUserId(id: Long?): String
     fun getAllUsers(): List<UserEntity>
 }
