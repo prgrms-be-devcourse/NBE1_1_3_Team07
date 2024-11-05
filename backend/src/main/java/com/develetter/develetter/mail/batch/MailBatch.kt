@@ -28,7 +28,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.transaction.PlatformTransactionManager
 
 @Configuration
-open class MailBatch(
+class MailBatch(
     private val jobRepository: JobRepository,
     private val mailRepository: MailRepository,
     private val userRepository: UserRepository,
@@ -46,7 +46,7 @@ open class MailBatch(
     }
 
     @Bean
-    open fun mailJob(): Job {
+    fun mailJob(): Job {
         return JobBuilder("mailJob", jobRepository)
             .start(saveMailStep())
             .next(partitionStep())
@@ -55,7 +55,7 @@ open class MailBatch(
 
     //메일 내용 저장
     @Bean
-    open fun saveMailStep(): Step {
+    fun saveMailStep(): Step {
         return StepBuilder("saveMailStep", jobRepository)
             .chunk<UserEntity, Mail>(CHUNK_SIZE, platformTransactionManager)
             .reader(userReader())
@@ -65,7 +65,7 @@ open class MailBatch(
     }
 
     @Bean
-    open fun userReader(): RepositoryItemReader<UserEntity> {
+    fun userReader(): RepositoryItemReader<UserEntity> {
         return RepositoryItemReaderBuilder<UserEntity>()
             .name("userReader")
             .pageSize(CHUNK_SIZE)
@@ -76,12 +76,12 @@ open class MailBatch(
     }
 
     @Bean
-    open fun saveMailProcessor(): ItemProcessor<UserEntity, Mail> {
+    fun saveMailProcessor(): ItemProcessor<UserEntity, Mail> {
         return ItemProcessor { user -> Mail(user.id) }
     }
 
     @Bean
-    open fun mailWriter(): RepositoryItemWriter<Mail> {
+    fun mailWriter(): RepositoryItemWriter<Mail> {
         return RepositoryItemWriterBuilder<Mail>()
             .repository(mailRepository)
             .methodName("save")
@@ -90,7 +90,7 @@ open class MailBatch(
 
     // 파티션 스텝
     @Bean
-    open fun partitionStep(): Step {
+    fun partitionStep(): Step {
         return StepBuilder("partitionStep", jobRepository)
             .partitioner("sendMailStep", mailPartitioner())
             .step(sendMailStep())
@@ -100,7 +100,7 @@ open class MailBatch(
 
     // 메일 파티셔너
     @Bean
-    open fun mailPartitioner(): Partitioner {
+    fun mailPartitioner(): Partitioner {
         return Partitioner { partitionStepExecution ->
             val result = mutableMapOf<String, ExecutionContext>()
             val totalMails = mailRepository.countByDeletedIsFalse()
@@ -120,7 +120,7 @@ open class MailBatch(
 
     //메일 전송
     @Bean
-    open fun sendMailStep(): Step {
+    fun sendMailStep(): Step {
         val customMailReader = CustomMailReader(mailRepository)
 
         return StepBuilder("sendMailStep", jobRepository)
@@ -145,7 +145,7 @@ open class MailBatch(
 
 
     @Bean
-    open fun mailReader(): CustomMailReader {
+    fun mailReader(): CustomMailReader {
         return CustomMailReader(mailRepository) // CustomMailReader 사용
     }
 
@@ -179,7 +179,7 @@ open class MailBatch(
 
 
     @Bean
-    open fun sendMailProcessor(): ItemProcessor<Mail, Mail> {
+    fun sendMailProcessor(): ItemProcessor<Mail, Mail> {
         val conferenceHtml = conferenceCalendarService.createConferenceCalendar()
 
         return ItemProcessor { mail ->
@@ -195,7 +195,7 @@ open class MailBatch(
     }
 
     @Bean
-    open fun emptyMailWriter(): ItemWriter<Mail> {
+    fun emptyMailWriter(): ItemWriter<Mail> {
         return ItemWriter { /* 빈 구현: 아무 동작도 수행하지 않음 */ }
     }
 
