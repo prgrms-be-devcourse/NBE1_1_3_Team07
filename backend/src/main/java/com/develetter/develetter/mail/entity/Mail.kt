@@ -1,7 +1,6 @@
 package com.develetter.develetter.mail.entity
 
 import com.develetter.develetter.global.entity.BaseEntity
-import com.querydsl.core.types.Projections.constructor
 import jakarta.persistence.*
 
 @Entity
@@ -13,7 +12,7 @@ class Mail(
     var id: Long? = null, // ID는 기본값 null
 
     @Column(name = "user_id", nullable = false)
-    var userId: Long,
+    var userId: Long?,
 
     @Column(name = "sending_check", nullable = false)
     var sendingCheck: Boolean = false, // 기본값 false
@@ -26,7 +25,7 @@ class Mail(
     protected constructor() : this(0)
 
     // userId를 매개변수로 받는 생성자 추가
-    constructor(userId: Long) : this(id = null, userId = userId)
+    constructor(userId: Long?) : this(id = null, userId = userId)
 
     // 메일 전송 확인 상태 업데이트
     fun updateMailCheck() {
@@ -38,3 +37,4 @@ class Mail(
         deleted = true
     }
 }
+

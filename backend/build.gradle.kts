@@ -76,6 +76,10 @@ dependencies {
 	// Redis
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
+	//coroutine
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.3")
+
 	// Additional Kotlin logging library
 	implementation("io.github.microutils:kotlin-logging:3.0.0")
 }

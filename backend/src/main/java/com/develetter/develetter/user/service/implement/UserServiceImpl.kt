@@ -157,29 +157,31 @@ class UserServiceImpl(
         }
     }
 
-//    override fun registerSubscribe(dto: RegisterSubscribeRequestDto): ResponseEntity<out LogInResponseDto> {
-//        return try {
-//            val userEntity = userRepository.findById(dto.userId)
-//            val updateUserEntity = UserEntity(
-//                accountId = userEntity.accountId,
-//                password = userEntity.password,
-//                email = userEntity.email,
-//                type = userEntity.type,
-//                role = userEntity.role,
-//                subscription = dto.subscribeType,
-//            )
-//            userRepository.save(updateUserEntity)
-//            LogInResponseDto.success()
-//        } catch (e: Exception) {
-//            log.info("구독 등록 실패: {}", e.message)
-//            LogInResponseDto.databaseError()
-//        }
-//    }
-//
-//    override fun getEmailByUserId(id: Long): String {
-//        val user = userRepository.findById(id)
-//        return user.email
-//    }
+    override fun registerSubscribe(dto: RegisterSubscribeRequestDto): ResponseEntity<out LogInResponseDto> {
+        return try {
+            val userEntity = userRepository.findById(dto.userId)
+                ?: throw NoSuchElementException("User with ID ${dto.userId} not found")
+            val updateUserEntity = UserEntity(
+                accountId = userEntity.accountId,
+                password = userEntity.password,
+                email = userEntity.email,
+                type = userEntity.type,
+                role = userEntity.role,
+                subscription = dto.subscribeType,
+            )
+            userRepository.save(updateUserEntity)
+            LogInResponseDto.success()
+        } catch (e: Exception) {
+            log.info("구독 등록 실패: {}", e.message)
+            LogInResponseDto.databaseError()
+        }
+    }
+
+    override fun getEmailByUserId(id: Long?): String {
+        val user = userRepository.findById(id)
+            ?: throw NoSuchElementException("User with ID ${id} not found")
+        return user.email
+    }
 
     override fun getAllUsers(): List<UserEntity> {
         return userRepository.findAll()

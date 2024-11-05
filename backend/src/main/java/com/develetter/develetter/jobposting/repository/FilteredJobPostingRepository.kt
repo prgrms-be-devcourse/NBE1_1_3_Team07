@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.Optional
 
 interface FilteredJobPostingRepository : JpaRepository<FilteredJobPosting, Long> {
-    fun findByUserId(userId: Long): Optional<FilteredJobPosting>
+    fun findByUserId(userId: Long?): Optional<FilteredJobPosting>
 }
