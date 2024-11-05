@@ -8,7 +8,6 @@ import com.develetter.develetter.mail.service.MailService
 import com.develetter.develetter.user.global.entity.UserEntity
 import com.develetter.develetter.user.repository.UserRepository
 import kotlinx.coroutines.*
-import mu.KotlinLogging
 import org.springframework.batch.core.*
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.job.builder.JobBuilder
@@ -28,8 +27,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.data.domain.Sort
 import org.springframework.transaction.PlatformTransactionManager
 
-private val log = KotlinLogging.logger {}
-
 @Configuration
 open class MailBatch(
     private val jobRepository: JobRepository,
@@ -43,7 +40,7 @@ open class MailBatch(
     private companion object {
         const val CHUNK_SIZE = 10
         //각 파티션에서 처리할 메일 개수
-        const val PARTITION_SIZE = 10
+        const val PARTITION_SIZE = 8
         //한 번에 처리할 파티션 수
         const val GRID_SIZE = 2
     }
