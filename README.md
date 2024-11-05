@@ -103,12 +103,21 @@ Programmers DevCourse BE 1기 2차 7팀 프로젝트
 
 ---
 
-# 3. ERD
+# 3. 추가 기능 개발
+* 건우 - 
+* 경훈 - JobPostingBatch의 ItemWriter()에 Redis를 사용하여 필터링 된 채용 정보를 캐싱하여 일괄 저장
+* 아영 - 
+* 재중 - 
+* 철진
+  
+---
+
+# 4. ERD
 <img width="521" alt="erd" src="https://github.com/user-attachments/assets/f784166a-1891-410c-bd96-92f767e89196">
 
 ---
 
-# 4. 화면 설계
+# 5. 화면 설계
 
 [develetter Figma](https://embed.figma.com/design/kqnI5bYEDtzKxzMLFlYNlp/develetter?node-id=0-1&node-type=canvas&t=JVjCxHuVzjakaIBT-0&embed-host=notion&footer=false&theme=system)
 
@@ -116,7 +125,7 @@ Programmers DevCourse BE 1기 2차 7팀 프로젝트
 
 ---
 
-# 5. 요구사항 명세
+# 6. 요구사항 명세
 
 [요구사항 명세 - Google Sheets](https://docs.google.com/spreadsheets/d/1ZPpwRtQhfJMNHB68tt5XvnMUpD6XriXt35Ug6cR5_mA/edit?gid=0#gid=0)
 
@@ -124,7 +133,7 @@ Programmers DevCourse BE 1기 2차 7팀 프로젝트
 
 ---
 
-# 6. API 명세
+# 7. API 명세
 
 [Postman API 명세](https://programmers-7-teeam.postman.co/workspace/d6e3fd25-4044-49a6-8410-82ad9dbbde13/documentation/37784458-a6b40313-d6f5-4b6f-aa45-2c53c2e0adf4)
 
@@ -132,20 +141,24 @@ Programmers DevCourse BE 1기 2차 7팀 프로젝트
 
 ---
 
-# 7. 개발 환경
+# 8. 개발 환경
 
 - OS : Mac
 - IDE : JetBrain IntelliJ
 
 | Software | 세부 Spec 사양 (Version) |
 | --- | --- |
-| Java | Java 17 |
+| Kotlin | 2.0.21 |
 | Spring Boot | 3.3.4 |
 | Spring Boot Libraries | Batch, Data JPA, JDBC, Mail, Oauth2, Web, Validation, Security, Thymeleaf: 3.3.4 |
 | Lombok | 1.18.20 |
 | QueryDSL | JPA: 5.0.0 |
 | MySQL Connector | 8.3.0 |
 | Jwt | jwt:0.11.2 |
+| Coroutines | 1.7.3 |
+| Swagger | 2.1.0 |
+| **Redis** | spring-boot-starter-data-redis |
+| **Additional Libraries** | Kotlin Logging, Jackson Kotlin Module |
 
 ### **협업도구**
 
@@ -167,14 +180,3 @@ Programmers DevCourse BE 1기 2차 7팀 프로젝트
 
 [트러블 슈팅](https://www.notion.so/65f3422e2062484eaf061aa8d867f28d?pvs=21)
 
-# 10. 추후 개발 예정
-
-  건우 - 이메일 인증을 링크를통해 인증하는 기능 개발
-  
-  경훈 - Spring Batch를 통해 모든 유저에게 맞춤화 된 채용 공고를 필터링할 때 비동기적으로 리팩토링
-  
-  아영 - 메일 전송 spring batch 사용
-  
-  재중 - 회원 탈퇴, 구독 중인 키워드 표기, ~~패키지를 기반으로 MSA 구조~~ 
-  
-  철진 - 기술 블로그 데이터 관련 Spring Batch 사용
