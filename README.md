@@ -9,6 +9,13 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
 ***
 
+## 🦹‍ Team
+|조재중|송경훈|최철진|양아영|배건우|
+|:---:|:---:|:---:|:---:|:---:|
+|팀장, 채용정보, 프론트|채용정보|기술블로그|메일발송|회원가입|
+|[m-a-king](https://github.com/m-a-king)|[rudgns328](https://github.com/rudgns328)|[Cheol-Jin](https://github.com/Cheol-Jin)|[ayoung-dev](https://github.com/ayoung-dev)|[CodeItpython](https://github.com/CodeItpython)|
+|![](https://avatars.githubusercontent.com/u/126754298?v=4)|![](https://avatars.githubusercontent.com/u/128586833?v=4)|![](https://avatars.githubusercontent.com/u/61444132?v=4)|![](https://avatars.githubusercontent.com/u/52439725?v=4)|![](https://avatars.githubusercontent.com/u/99863853?v=4)|
+
 ## 기술스택
 
 <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white"> <img src="https://img.shields.io/badge/mysql-5395FD?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/NextJS-8D5A9E?style=for-the-badge&logo=next.js&logoColor=white"> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
@@ -25,16 +32,6 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
  develetter는 신입 개발자와 취업 준비생을 위한 맞춤형 뉴스레터 서비스입니다. 기술 환경이 빠르게 변화하는 요즘, 우리는 종종 필터 버블에 갇혀 중요한 정보를 놓치거나, 반대로 과도한 정보로 인해 콘텐츠 피로를 겪곤 합니다.
 
  이런 문제를 해결하고자 develetter를 기획했습니다. 우리는 사용자의 관심사에 맞춘 채용 공고, 컨퍼런스 일정, 개발 블로그 콘텐츠를 정기적으로 이메일로 제공합니다. 개인화된 필터링을 통해 꼭 필요한 정보만을 정확하게 전달함으로써, 신입 개발자와 취업 준비생들의 성장을 돕는 것이 develetter의 목표입니다.
-
-## 팀원 소개
-
-| 이름 | Github | 역할 |
-| --- | --- | --- |
-| [팀장] 조재중 | https://github.com/m-a-king | 채용 정보, 프론트 |
-| 배건우 | https://github.com/CodeItpython | 회원가입 및 로그인처리 |
-| 송경훈 | https://github.com/rudgns328 | 채용 정보 |
-| 양아영 | https://github.com/ayoung-dev | 메일 발송 |
-| 최철진 | https://github.com/Cheol-Jin | 기술 블로그 |
 
 ## 개발 진행 상황
 [GitHub Project를 통해 진행 상황 관리](https://github.com/orgs/prgrms-be-devcourse/projects/44/views/4)
