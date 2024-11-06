@@ -1,9 +1,11 @@
 
 <img width="132" alt="로고" src="https://github.com/user-attachments/assets/f381eb6e-5c46-48ad-8df2-e4718b7784f1">
 
-## NBE1_2_Team07
+## NBE1_3_Team07
 
 Programmers DevCourse BE 1기 3차 7팀 프로젝트
+
+▶️ [Notion](https://www.notion.so/a09d22a7a9f14644afb1727697b18d8c?pvs=4)
 
 ***
 
