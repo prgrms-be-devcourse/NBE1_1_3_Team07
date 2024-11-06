@@ -93,6 +93,7 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
 - WebClient 라이브러리를 사용하여 사람인 채용 공고 API 호출 및 응답 데이터 저장
 - Spring Batch를 통해 사용자마다 맞춤화 된 채용 공고 필터링(QuerydslNoOffsetPagingItemReader를 활용한 성능 개선)
+- Redis를 사용하여 필터링된 채용 공고 캐싱 후 일괄 저장
 - Scheduler를 통해 주기적으로 사람인 채용 공고 업데이트 및 맞춤화 된 채용 공고 필터링
 
 **기술 블로그**
@@ -107,12 +108,12 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
 ---
 
-# 4. ERD
+# 3. ERD
 <img width="521" alt="erd" src="https://github.com/user-attachments/assets/f784166a-1891-410c-bd96-92f767e89196">
 
 ---
 
-# 5. 화면 설계
+# 4. 화면 설계
 
 [develetter Figma](https://embed.figma.com/design/kqnI5bYEDtzKxzMLFlYNlp/develetter?node-id=0-1&node-type=canvas&t=JVjCxHuVzjakaIBT-0&embed-host=notion&footer=false&theme=system)
 
@@ -120,7 +121,7 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
 ---
 
-# 6. 요구사항 명세
+# 5. 요구사항 명세
 
 [요구사항 명세 - Google Sheets](https://docs.google.com/spreadsheets/d/1ZPpwRtQhfJMNHB68tt5XvnMUpD6XriXt35Ug6cR5_mA/edit?gid=0#gid=0)
 
@@ -128,7 +129,7 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
 ---
 
-# 7. API 명세
+# 6. API 명세
 
 [Postman API 명세](https://programmers-7-teeam.postman.co/workspace/d6e3fd25-4044-49a6-8410-82ad9dbbde13/documentation/37784458-a6b40313-d6f5-4b6f-aa45-2c53c2e0adf4)
 
@@ -136,7 +137,7 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
 ---
 
-# 8. 개발 환경
+# 7. 개발 환경
 
 - OS : Mac
 - IDE : JetBrain IntelliJ
@@ -171,7 +172,7 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
 ---
 
-# 9. 트러블 슈팅
+# 8. 트러블 슈팅
 
 [트러블 슈팅](https://www.notion.so/65f3422e2062484eaf061aa8d867f28d?pvs=21)
 
