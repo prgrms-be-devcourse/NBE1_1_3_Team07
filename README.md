@@ -3,7 +3,7 @@
 
 ## NBE1_2_Team07
 
-Programmers DevCourse BE 1기 2차 7팀 프로젝트
+Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
 ***
 
@@ -81,8 +81,10 @@ Programmers DevCourse BE 1기 2차 7팀 프로젝트
 
 **메일**
 
-- Scheduler를 통해 정기적으로 메일 발송
-- 메일 발송 후 deleted 컬럼 update로 Mail Table 컬럼 soft delete
+- Spring Batch와 Scheduler를 통해 정기적으로 메일 발송
+- Coroutine을 통해 메일 비동기 처리
+- Batch Partitioning을 통해 메일 대량 발송 오버헤드 관리
+- 메일 발송 및 삭제 관리
 - Thymeleaf를 통해 동적 HTML 생성하여 메일 템플릿 생성
 
 **채용공고**
@@ -101,15 +103,6 @@ Programmers DevCourse BE 1기 2차 7팀 프로젝트
 - 관리자에 의한 컨퍼런스 일정 CRUD
 </aside>
 
----
-
-# 3. 추가 기능 개발
-* 건우 - 
-* 경훈 - JobPostingBatch의 ItemWriter()에 Redis를 사용하여 필터링 된 채용 정보를 캐싱하여 일괄 저장
-* 아영 - 
-* 재중 - 
-* 철진
-  
 ---
 
 # 4. ERD
