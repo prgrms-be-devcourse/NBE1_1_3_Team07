@@ -9,6 +9,16 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
 ***
 
+## 기술스택
+
+<img src="https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white">
+
+<img src="https://img.shields.io/badge/mysql-5395FD?style=for-the-badge&logo=mysql&logoColor=white">
+
+<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+
+<img src="https://img.shields.io/badge/NextJS-6DB33F?style=for-the-badge&logo=next-js&logoColor=white">
+
 # 1. 개요
 <img width="50%" alt="대표이미지" src="https://github.com/user-attachments/assets/b6d8693c-d524-47b6-b2ee-32edd1ab99cd">
 
@@ -158,11 +168,11 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
 ### **협업도구**
 
-- Discord
-- Slack
-- Notion
-- Github
-- JetBrain Code With Me
+- <img src="https://img.shields.io/badge/discord-1071D3?style=flat-square&logo=discord&logoColor=white"> 
+- <img src="https://img.shields.io/badge/Slack-6B46C1?style=flat-square&logo=slack&logoColor=white">
+- <img src="https://img.shields.io/badge/IntelliJ IDEA-4A154B?style=flat-square&logo=intellijidea&logoColor=white"> 
+- <img src="https://img.shields.io/badge/notion-5395FD?style=flat-square&logo=notion&logoColor=white"> 
+- <img src="https://img.shields.io/badge/github-0?style=flat-square&logo=github&logoColor=white&color=%2385EA2D">
 
 ### 코딩 컨벤션
 
