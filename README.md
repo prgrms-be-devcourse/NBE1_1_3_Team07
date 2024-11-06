@@ -12,7 +12,7 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 ## 🦹‍ Team
 |조재중|송경훈|최철진|양아영|배건우|
 |:---:|:---:|:---:|:---:|:---:|
-|팀장, 채용정보, 프론트|채용정보|기술블로그|메일발송|회원가입|
+|팀장, 채용정보, 프론트|채용정보|기술블로그|메일발송|회원가입|
 |[m-a-king](https://github.com/m-a-king)|[rudgns328](https://github.com/rudgns328)|[Cheol-Jin](https://github.com/Cheol-Jin)|[ayoung-dev](https://github.com/ayoung-dev)|[CodeItpython](https://github.com/CodeItpython)|
 |![](https://avatars.githubusercontent.com/u/126754298?v=4)|![](https://avatars.githubusercontent.com/u/128586833?v=4)|![](https://avatars.githubusercontent.com/u/61444132?v=4)|![](https://avatars.githubusercontent.com/u/52439725?v=4)|![](https://avatars.githubusercontent.com/u/99863853?v=4)|
 
