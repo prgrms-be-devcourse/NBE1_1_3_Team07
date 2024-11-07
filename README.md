@@ -126,7 +126,8 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
 [요구사항 명세 - Google Sheets](https://docs.google.com/spreadsheets/d/1ZPpwRtQhfJMNHB68tt5XvnMUpD6XriXt35Ug6cR5_mA/edit?gid=0#gid=0)
 
-<img width="1739" alt="요구사항명세" src="https://github.com/user-attachments/assets/182d31b2-b3c2-40de-bc47-371700036431">
+<img width="1051" alt="요구사항명세" src="https://github.com/user-attachments/assets/f01f0e0b-9b5c-44ce-8c8e-9fecd51102a4">
+
 
 ---
 
