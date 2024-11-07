@@ -175,5 +175,5 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
 # 8. 트러블 슈팅
 
-[트러블 슈팅](https://www.notion.so/65f3422e2062484eaf061aa8d867f28d?pvs=21)
+[트러블 슈팅](https://www.notion.so/a-young/1370cdfcaa44805fa0cbdb68fb405a39?v=b09ee9394c13489286eb95d12f969e73&pvs=4)
 
