@@ -5,7 +5,7 @@
 
 Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
-▶️ [Notion](https://www.notion.so/a09d22a7a9f14644afb1727697b18d8c?pvs=4)
+▶️ [Notion](https://a-young.notion.site/1370cdfcaa4480358f8fcf0ad9305c21?pvs=4)
 
 ***
 
@@ -165,12 +165,6 @@ Programmers DevCourse BE 1기 3차 7팀 프로젝트
 - <img src="https://img.shields.io/badge/IntelliJ IDEA-4A154B?style=flat-square&logo=intellijidea&logoColor=white"> 
 - <img src="https://img.shields.io/badge/notion-5395FD?style=flat-square&logo=notion&logoColor=white"> 
 - <img src="https://img.shields.io/badge/github-0?style=flat-square&logo=github&logoColor=white&color=%2385EA2D">
-
-### 코딩 컨벤션
-
-[Git  Convention](https://www.notion.so/Git-Convention-bac0523312b046d6908f50d2d81fd3e8?pvs=21)
-
-[Code Convention](https://www.notion.so/Code-Convention-1b666e9e4ef04237b97004d0b79bae3b?pvs=21)
 
 ---
 
