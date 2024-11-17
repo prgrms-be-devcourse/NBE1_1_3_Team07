@@ -5,7 +5,7 @@
 
 Programmers DevCourse BE 1기 3차 7팀 프로젝트
 
-▶️ [Notion](https://a-young.notion.site/1370cdfcaa4480358f8fcf0ad9305c21?pvs=4)
+▶️ [Notion](https://platinum-glade-417.notion.site/1-141f02cd47c080ccb580c0ca95c08fa1)
 
 ***
 
